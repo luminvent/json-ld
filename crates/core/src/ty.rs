@@ -1,7 +1,7 @@
 use super::Term;
 use crate::{Id, ValidId};
 use iref::IriBuf;
-use json_ld_syntax::Keyword;
+use json_ld_syntax_next::Keyword;
 use std::convert::TryFrom;
 use std::fmt;
 

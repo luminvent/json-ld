@@ -7,7 +7,7 @@ use crate::expansion::{self, Expand};
 use crate::IntoDocumentResult;
 use crate::{Context, Flatten, Loader, RemoteDocument, RemoteDocumentReference};
 use contextual::WithContext;
-use json_ld_core::{Document, RemoteContextReference};
+use json_ld_core_next::{Document, RemoteContextReference};
 use rdf_types::{Generator, VocabularyMut};
 use std::hash::Hash;
 
@@ -25,7 +25,7 @@ impl<I> JsonLdProcessor<I> for RemoteDocument<I> {
 		I: Clone + Eq + Hash,
 		N::BlankId: Clone + Eq + Hash,
 	{
-		if json_ld_syntax::Compare::compare(self.document(), other.document()) {
+		if json_ld_syntax_next::Compare::compare(self.document(), other.document()) {
 			let a = JsonLdProcessor::expand_full(
 				self,
 				vocabulary,
@@ -199,7 +199,7 @@ impl<I> JsonLdProcessor<I> for RemoteDocument<I> {
 			)
 			.await
 			.map_err(FlattenError::Compact),
-			None => Ok(json_ld_syntax::IntoJson::into_json(
+			None => Ok(json_ld_syntax_next::IntoJson::into_json(
 				flattened_output.into_with(vocabulary),
 			)),
 		}

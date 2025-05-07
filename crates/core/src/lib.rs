@@ -1,5 +1,5 @@
 //! JSON-LD core types.
-pub use json_ld_syntax::{Direction, LenientLangTag, LenientLangTagBuf, Nullable};
+pub use json_ld_syntax_next::{Direction, LenientLangTag, LenientLangTagBuf, Nullable};
 
 mod container;
 pub mod context;

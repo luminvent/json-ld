@@ -10,7 +10,7 @@ use crate::{object::InvalidExpandedJson, Direction, LenientLangTag, LenientLangT
 pub struct LangString {
 	/// Actual content of the string.
 	#[cfg_attr(feature = "serde", serde(rename = "@value"))]
-	data: json_ld_syntax::String,
+	data: json_ld_syntax_next::String,
 
 	#[cfg_attr(
 		feature = "serde",
@@ -32,10 +32,10 @@ pub struct InvalidLangString;
 impl LangString {
 	/// Create a new language string.
 	pub fn new(
-		data: json_ld_syntax::String,
+		data: json_ld_syntax_next::String,
 		language: Option<LenientLangTagBuf>,
 		direction: Option<Direction>,
-	) -> Result<Self, json_ld_syntax::String> {
+	) -> Result<Self, json_ld_syntax_next::String> {
 		if language.is_some() || direction.is_some() {
 			Ok(Self {
 				data,
@@ -50,7 +50,7 @@ impl LangString {
 	pub fn into_parts(
 		self,
 	) -> (
-		json_ld_syntax::String,
+		json_ld_syntax_next::String,
 		Option<LenientLangTagBuf>,
 		Option<Direction>,
 	) {
@@ -197,7 +197,7 @@ impl<'de> serde::Deserialize<'de> for LangString {
 		#[derive(serde::Deserialize)]
 		struct Value {
 			#[serde(rename = "@value")]
-			data: json_ld_syntax::String,
+			data: json_ld_syntax_next::String,
 			#[serde(rename = "@language")]
 			language: Option<LenientLangTagBuf>,
 			#[serde(rename = "@direction")]

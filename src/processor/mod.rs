@@ -4,9 +4,9 @@ use crate::expansion;
 use crate::syntax::ErrorCode;
 use crate::{flattening::ConflictingIndexes, Context, ExpandedDocument, Loader, ProcessingMode};
 use iref::IriBuf;
-use json_ld_core::rdf::RdfDirection;
-use json_ld_core::{ContextLoadError, LoadError};
-use json_ld_core::{Document, RdfQuads, RemoteContextReference};
+use json_ld_core_next::rdf::RdfDirection;
+use json_ld_core_next::{ContextLoadError, LoadError};
+use json_ld_core_next::{Document, RdfQuads, RemoteContextReference};
 use rdf_types::{vocabulary, BlankIdBuf, Generator, Vocabulary, VocabularyMut};
 use std::hash::Hash;
 
@@ -308,7 +308,7 @@ pub type CompareResult = Result<bool, ExpandError>;
 ///
 /// ```
 /// use static_iref::iri;
-/// use json_ld::{JsonLdProcessor, RemoteDocumentReference};
+/// use json_ld_next::{JsonLdProcessor, RemoteDocumentReference};
 ///
 /// # #[async_std::main]
 /// # async fn main() {
@@ -316,7 +316,7 @@ pub type CompareResult = Result<bool, ExpandError>;
 ///
 /// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 /// // the local `example` directory. No HTTP query.
-/// let mut loader = json_ld::FsLoader::default();
+/// let mut loader = json_ld_next::FsLoader::default();
 /// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 ///
 /// let expanded = input.expand(&loader)
@@ -332,7 +332,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	///
 	/// # #[async_std::main]
@@ -345,7 +345,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///  
 	/// assert!(input1.compare_full(
@@ -380,7 +380,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	///
 	/// # #[async_std::main]
@@ -393,7 +393,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///  
 	/// assert!(input1.compare_with_using(
@@ -430,7 +430,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// use locspan::Meta;
 	///
@@ -444,7 +444,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///  
 	/// assert!(input1.compare_with(
@@ -478,7 +478,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 	/// use locspan::Meta;
 	///
 	/// # #[async_std::main]
@@ -489,7 +489,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///  
 	/// assert!(input1.compare_using(
@@ -528,7 +528,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 	/// use locspan::Meta;
 	///
 	/// # #[async_std::main]
@@ -539,7 +539,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///  
 	/// assert!(input1.compare(
@@ -567,7 +567,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -580,7 +580,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let expanded = input
@@ -617,7 +617,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -630,7 +630,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let expanded = input
@@ -668,7 +668,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -681,7 +681,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let expanded = input
@@ -717,7 +717,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -726,7 +726,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let expanded = input
@@ -762,7 +762,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -771,7 +771,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let expanded = input
@@ -854,7 +854,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -870,7 +870,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let compact = input
@@ -910,7 +910,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -926,7 +926,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let compact = input
@@ -969,7 +969,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -985,7 +985,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let compact = input
@@ -1025,7 +1025,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -1037,7 +1037,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let compact = input
@@ -1076,7 +1076,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -1088,7 +1088,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let compact = input
@@ -1133,7 +1133,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	///
 	/// # #[async_std::main]
@@ -1147,7 +1147,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1198,7 +1198,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	///
 	/// # #[async_std::main]
@@ -1212,7 +1212,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1264,7 +1264,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::vocabulary::{IriVocabularyMut, IndexVocabulary};
 	///
 	/// # #[async_std::main]
@@ -1278,7 +1278,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1327,7 +1327,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -1336,7 +1336,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1384,7 +1384,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	///
 	/// # #[async_std::main]
 	/// # async fn main() {
@@ -1393,7 +1393,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1442,7 +1442,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::{Quad, vocabulary::{IriVocabularyMut, IndexVocabulary}};
 	///
 	/// # #[async_std::main]
@@ -1456,7 +1456,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1528,7 +1528,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::{Quad, vocabulary::{IriVocabularyMut, IndexVocabulary}};
 	///
 	/// # #[async_std::main]
@@ -1542,7 +1542,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1602,7 +1602,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::{Quad, vocabulary::{IriVocabularyMut, IndexVocabulary}};
 	///
 	/// # #[async_std::main]
@@ -1616,7 +1616,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1672,7 +1672,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::Quad;
 	/// use locspan::{Location, Span};
 	///
@@ -1683,7 +1683,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1745,7 +1745,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// ```
 	/// use static_iref::iri;
-	/// use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
+	/// use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, warning};
 	/// use rdf_types::Quad;
 	/// use locspan::{Location, Span};
 	///
@@ -1756,7 +1756,7 @@ pub trait JsonLdProcessor<Iri>: Sized {
 	///
 	/// // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 	/// // the local `example` directory. No HTTP query.
-	/// let mut loader = json_ld::FsLoader::default();
+	/// let mut loader = json_ld_next::FsLoader::default();
 	/// loader.mount(iri!("https://example.com/").to_owned(), "examples");
 	///
 	/// let mut generator = rdf_types::generator::Blank::new();
@@ -1822,7 +1822,7 @@ impl<V: Vocabulary, G: rdf_types::Generator<V>> ToRdf<V, G> {
 		}
 	}
 
-	pub fn quads(&mut self) -> json_ld_core::rdf::Quads<'_, V, G> {
+	pub fn quads(&mut self) -> json_ld_core_next::rdf::Quads<'_, V, G> {
 		self.doc.rdf_quads_full(
 			&mut self.vocabulary,
 			&mut self.generator,
@@ -1832,7 +1832,7 @@ impl<V: Vocabulary, G: rdf_types::Generator<V>> ToRdf<V, G> {
 	}
 
 	#[inline(always)]
-	pub fn cloned_quads(&mut self) -> json_ld_core::rdf::ClonedQuads<'_, V, G> {
+	pub fn cloned_quads(&mut self) -> json_ld_core_next::rdf::ClonedQuads<'_, V, G> {
 		self.quads().cloned()
 	}
 
@@ -1932,7 +1932,7 @@ where
 #[cfg(test)]
 mod tests {
 	use futures::Future;
-	use json_ld_core::{NoLoader, RemoteDocument};
+	use json_ld_core_next::{NoLoader, RemoteDocument};
 	use json_syntax::Value;
 	use rdf_types::generator;
 

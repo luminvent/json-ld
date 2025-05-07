@@ -1,8 +1,8 @@
 //! JSON-LD context processing types and algorithms.
 use algorithm::{Action, RejectVocab};
-pub use json_ld_core::{warning, Context, ProcessingMode};
-use json_ld_core::{ExtractContextError, LoadError, Loader};
-use json_ld_syntax::ErrorCode;
+pub use json_ld_core_next::{warning, Context, ProcessingMode};
+use json_ld_core_next::{ExtractContextError, LoadError, Loader};
+use json_ld_syntax_next::ErrorCode;
 use rdf_types::VocabularyMut;
 use std::{fmt, hash::Hash};
 
@@ -36,9 +36,9 @@ impl<N> contextual::DisplayWithContext<N> for Warning {
 	}
 }
 
-pub trait WarningHandler<N>: json_ld_core::warning::Handler<N, Warning> {}
+pub trait WarningHandler<N>: json_ld_core_next::warning::Handler<N, Warning> {}
 
-impl<N, H> WarningHandler<N> for H where H: json_ld_core::warning::Handler<N, Warning> {}
+impl<N, H> WarningHandler<N> for H where H: json_ld_core_next::warning::Handler<N, Warning> {}
 
 /// Errors that can happen during context processing.
 #[derive(Debug, thiserror::Error)]

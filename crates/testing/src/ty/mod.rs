@@ -3,7 +3,7 @@ use crate::{
 };
 use contextual::AsRefWithContext;
 use core::fmt;
-use json_ld::ValidId;
+use json_ld_next::ValidId;
 use proc_macro2::TokenStream;
 use quote::quote;
 use rdf_types::{
@@ -68,12 +68,12 @@ impl Type {
 		vocabulary: &IndexVocabulary,
 		spec: &TestSpec,
 		dataset: &IndexedBTreeDataset<IndexTerm>,
-		value: &json_ld::rdf::Value<IriIndex, BlankIdIndex, LiteralIndex>,
+		value: &json_ld_next::rdf::Value<IriIndex, BlankIdIndex, LiteralIndex>,
 	) -> Result<TokenStream, Box<Error>> {
 		match self {
 			Self::Bool => {
 				let b = match value {
-					json_ld::rdf::Value::Literal(l) => {
+					json_ld_next::rdf::Value::Literal(l) => {
 						let literal = vocabulary.literal(l).unwrap();
 						if literal.type_
 							== rdf_types::LiteralType::Any(IriIndex::Iri(Vocab::Xsd(
@@ -97,14 +97,14 @@ impl Type {
 			}
 			Self::String => {
 				let s = match value {
-					json_ld::rdf::Value::Literal(lit) => vocabulary.literal(lit).unwrap().value,
-					json_ld::rdf::Value::Id(id) => id.as_ref_with(vocabulary),
+					json_ld_next::rdf::Value::Literal(lit) => vocabulary.literal(lit).unwrap().value,
+					json_ld_next::rdf::Value::Id(id) => id.as_ref_with(vocabulary),
 				};
 
 				Ok(quote! { #s })
 			}
 			Self::Iri => match value {
-				json_ld::rdf::Value::Id(ValidId::Iri(i)) => {
+				json_ld_next::rdf::Value::Id(ValidId::Iri(i)) => {
 					let s = vocabulary.iri(i).unwrap().as_str();
 					Ok(quote! { ::static_iref::iri!(#s) })
 				}
@@ -112,7 +112,7 @@ impl Type {
 			},
 			Self::ProcessingMode => {
 				let s = match value {
-					json_ld::rdf::Value::Literal(l) => {
+					json_ld_next::rdf::Value::Literal(l) => {
 						let literal = vocabulary.literal(l).unwrap();
 						if literal.type_
 							== rdf_types::LiteralType::Any(IriIndex::Iri(Vocab::Xsd(
@@ -126,13 +126,13 @@ impl Type {
 					_ => return Err(Box::new(Error::InvalidValue(self.clone(), *value))),
 				};
 
-				match json_ld::ProcessingMode::try_from(s) {
+				match json_ld_next::ProcessingMode::try_from(s) {
 					Ok(p) => match p {
-						json_ld::ProcessingMode::JsonLd1_0 => {
-							Ok(quote! { ::json_ld::ProcessingMode::JsonLd1_0 })
+						json_ld_next::ProcessingMode::JsonLd1_0 => {
+							Ok(quote! { ::json_ld_next::ProcessingMode::JsonLd1_0 })
 						}
-						json_ld::ProcessingMode::JsonLd1_1 => {
-							Ok(quote! { ::json_ld::ProcessingMode::JsonLd1_1 })
+						json_ld_next::ProcessingMode::JsonLd1_1 => {
+							Ok(quote! { ::json_ld_next::ProcessingMode::JsonLd1_1 })
 						}
 					},
 					Err(_) => Err(Box::new(Error::InvalidValue(self.clone(), *value))),
@@ -140,7 +140,7 @@ impl Type {
 			}
 			Self::RdfDirection => {
 				let s = match value {
-					json_ld::rdf::Value::Literal(l) => {
+					json_ld_next::rdf::Value::Literal(l) => {
 						let literal = vocabulary.literal(l).unwrap();
 						if literal.type_
 							== rdf_types::LiteralType::Any(IriIndex::Iri(Vocab::Xsd(
@@ -154,20 +154,20 @@ impl Type {
 					_ => return Err(Box::new(Error::InvalidValue(self.clone(), *value))),
 				};
 
-				match json_ld::rdf::RdfDirection::try_from(s) {
+				match json_ld_next::rdf::RdfDirection::try_from(s) {
 					Ok(p) => match p {
-						json_ld::rdf::RdfDirection::CompoundLiteral => {
-							Ok(quote! { ::json_ld::rdf::RdfDirection::CompoundLiteral })
+						json_ld_next::rdf::RdfDirection::CompoundLiteral => {
+							Ok(quote! { ::json_ld_next::rdf::RdfDirection::CompoundLiteral })
 						}
-						json_ld::rdf::RdfDirection::I18nDatatype => {
-							Ok(quote! { ::json_ld::rdf::RdfDirection::I18nDatatype })
+						json_ld_next::rdf::RdfDirection::I18nDatatype => {
+							Ok(quote! { ::json_ld_next::rdf::RdfDirection::I18nDatatype })
 						}
 					},
 					Err(_) => Err(Box::new(Error::InvalidValue(self.clone(), *value))),
 				}
 			}
 			Self::Ref(r) => match value {
-				json_ld::rdf::Value::Id(id) => {
+				json_ld_next::rdf::Value::Id(id) => {
 					let d = spec.types.get(r).unwrap();
 					let mod_id = &spec.id;
 					d.generate(
@@ -281,7 +281,7 @@ impl Definition {
 
 				for ty_iri in node_types {
 					match ty_iri {
-						json_ld::rdf::Value::Id(ValidId::Iri(ty_iri)) => {
+						json_ld_next::rdf::Value::Id(ValidId::Iri(ty_iri)) => {
 							if let Some(v) = e.variants.get(ty_iri) {
 								if variant.replace(v).is_some() {
 									return Err(Box::new(Error::MultipleTypeVariants(id)));

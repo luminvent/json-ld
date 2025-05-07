@@ -1,6 +1,6 @@
 use std::hash::Hash;
 
-use json_ld_core::{
+use json_ld_core_next::{
 	rdf::{RDF_FIRST, RDF_REST},
 	Indexed, IndexedObject, Object,
 };

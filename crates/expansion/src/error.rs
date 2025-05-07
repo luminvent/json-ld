@@ -1,13 +1,13 @@
-use json_ld_context_processing::algorithm::RejectVocab;
-use json_ld_syntax::ErrorCode;
+use json_ld_context_processing_next::algorithm::RejectVocab;
+use json_ld_syntax_next::ErrorCode;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
 	#[error("Invalid context: {0}")]
-	ContextSyntax(#[from] json_ld_syntax::context::InvalidContext),
+	ContextSyntax(#[from] json_ld_syntax_next::context::InvalidContext),
 
 	#[error("Context processing failed: {0}")]
-	ContextProcessing(json_ld_context_processing::Error),
+	ContextProcessing(json_ld_context_processing_next::Error),
 
 	#[error("Invalid `@index` value")]
 	InvalidIndexValue,
@@ -99,8 +99,8 @@ impl Error {
 	}
 }
 
-impl From<json_ld_context_processing::Error> for Error {
-	fn from(e: json_ld_context_processing::Error) -> Self {
+impl From<json_ld_context_processing_next::Error> for Error {
+	fn from(e: json_ld_context_processing_next::Error) -> Self {
 		Self::ContextProcessing(e)
 	}
 }

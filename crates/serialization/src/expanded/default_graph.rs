@@ -1,6 +1,6 @@
 use std::hash::Hash;
 
-use json_ld_core::{ExpandedDocument, Indexed, Object};
+use json_ld_core_next::{ExpandedDocument, Indexed, Object};
 use linked_data::{CowRdfTerm, LinkedDataResource};
 use rdf_types::{
 	interpretation::{
@@ -60,7 +60,7 @@ where
 				self.result.insert(Indexed::new(Object::Value(value), None));
 				return Ok(());
 			}
-			Some(Term::Id(id)) => Some(json_ld_core::Id::Valid(id)),
+			Some(Term::Id(id)) => Some(json_ld_core_next::Id::Valid(id)),
 			_ => None,
 		};
 

@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-expansion"
+name = "json-ld-expansion-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -12,9 +12,9 @@ documentation = "https://docs.rs/json-ld-expansion"
 readme = "README.md"
 
 [dependencies]
-json-ld-core.workspace = true
-json-ld-syntax.workspace = true
-json-ld-context-processing.workspace = true
+json-ld-core-next.workspace = true
+json-ld-syntax-next.workspace = true
+json-ld-context-processing-next.workspace = true
 json-syntax.workspace = true
 langtag.workspace = true
 iref.workspace = true

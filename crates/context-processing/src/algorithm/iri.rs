@@ -4,8 +4,8 @@ use super::{DefinedTerms, Environment, Merged};
 use crate::{Error, Options, ProcessingStack, Warning, WarningHandler};
 use contextual::WithContext;
 use iref::{Iri, IriRef};
-use json_ld_core::{warning, Context, Id, Loader, Term};
-use json_ld_syntax::{self as syntax, context::definition::Key, ExpandableRef, Nullable};
+use json_ld_core_next::{warning, Context, Id, Loader, Term};
+use json_ld_syntax_next::{self as syntax, context::definition::Key, ExpandableRef, Nullable};
 use rdf_types::{
 	vocabulary::{BlankIdVocabulary, IriVocabulary},
 	BlankId, Vocabulary, VocabularyMut,
@@ -195,7 +195,7 @@ where
 	}
 }
 
-fn invalid_iri<N, L, W: json_ld_core::warning::Handler<N, Warning>>(
+fn invalid_iri<N, L, W: json_ld_core_next::warning::Handler<N, Warning>>(
 	env: &mut Environment<N, L, W>,
 	value: String,
 ) -> Term<N::Iri, N::BlankId>

@@ -5,13 +5,13 @@ pub mod inverse;
 use crate::{Direction, LenientLangTag, LenientLangTagBuf, Term};
 use contextual::WithContext;
 use iref::IriBuf;
-use json_ld_syntax::{KeywordType, Nullable};
+use json_ld_syntax_next::{KeywordType, Nullable};
 use once_cell::sync::OnceCell;
 use rdf_types::{BlankIdBuf, Id, Vocabulary};
 use std::borrow::Borrow;
 use std::hash::Hash;
 
-pub use json_ld_syntax::context::{
+pub use json_ld_syntax_next::context::{
 	definition::{Key, KeyOrType, Type},
 	term_definition::Nest,
 };
@@ -228,10 +228,10 @@ impl<T, B> Context<T, B> {
 	pub fn into_syntax_definition(
 		self,
 		vocabulary: &impl Vocabulary<Iri = T, BlankId = B>,
-	) -> json_ld_syntax::context::Definition {
+	) -> json_ld_syntax_next::context::Definition {
 		let (bindings, type_) = self.definitions.into_parts();
 
-		json_ld_syntax::context::Definition {
+		json_ld_syntax_next::context::Definition {
 			base: self
 				.base_iri
 				.map(|i| Nullable::Some(vocabulary.iri(&i).unwrap().to_owned().into())),
@@ -287,14 +287,14 @@ pub trait IntoSyntax<T = IriBuf, B = BlankIdBuf> {
 	fn into_syntax(
 		self,
 		vocabulary: &impl Vocabulary<Iri = T, BlankId = B>,
-	) -> json_ld_syntax::context::Context;
+	) -> json_ld_syntax_next::context::Context;
 }
 
-impl<T, B> IntoSyntax<T, B> for json_ld_syntax::context::Context {
+impl<T, B> IntoSyntax<T, B> for json_ld_syntax_next::context::Context {
 	fn into_syntax(
 		self,
 		_namespace: &impl Vocabulary<Iri = T, BlankId = B>,
-	) -> json_ld_syntax::context::Context {
+	) -> json_ld_syntax_next::context::Context {
 		self
 	}
 }
@@ -303,8 +303,8 @@ impl<T, B: Clone> IntoSyntax<T, B> for Context<T, B> {
 	fn into_syntax(
 		self,
 		vocabulary: &impl Vocabulary<Iri = T, BlankId = B>,
-	) -> json_ld_syntax::context::Context {
-		json_ld_syntax::context::Context::One(json_ld_syntax::ContextEntry::Definition(
+	) -> json_ld_syntax_next::context::Context {
+		json_ld_syntax_next::context::Context::One(json_ld_syntax_next::ContextEntry::Definition(
 			self.into_syntax_definition(vocabulary),
 		))
 	}

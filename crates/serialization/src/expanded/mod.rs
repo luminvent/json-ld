@@ -1,4 +1,4 @@
-use json_ld_core::{ExpandedDocument, Indexed, Node, Object};
+use json_ld_core_next::{ExpandedDocument, Indexed, Node, Object};
 use linked_data::CowRdfTerm;
 use rdf_types::{
 	interpretation::{
@@ -73,7 +73,7 @@ where
 			.map(CowRdfTerm::into_owned)
 		{
 			Some(Term::Literal(_)) => return Err(Error::InvalidGraph),
-			Some(Term::Id(id)) => Node::with_id(json_ld_core::Id::Valid(id)),
+			Some(Term::Id(id)) => Node::with_id(json_ld_core_next::Id::Valid(id)),
 			None => Node::new(),
 		};
 

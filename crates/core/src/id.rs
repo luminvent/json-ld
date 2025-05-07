@@ -3,7 +3,7 @@ use crate::Term;
 use contextual::{AsRefWithContext, DisplayWithContext, WithContext};
 use hashbrown::HashMap;
 use iref::{Iri, IriBuf};
-use json_ld_syntax::IntoJsonWithContext;
+use json_ld_syntax_next::IntoJsonWithContext;
 use rdf_types::{
 	vocabulary::{BlankIdVocabulary, IriVocabulary},
 	BlankId, BlankIdBuf, Generator, InvalidBlankId, Vocabulary, VocabularyMut,

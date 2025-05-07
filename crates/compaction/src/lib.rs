@@ -5,13 +5,13 @@
 //!
 //! The compaction algorithm is provided by the [`Compact`] trait.
 use indexmap::IndexSet;
-use json_ld_context_processing::{Options as ProcessingOptions, Process};
-use json_ld_core::{
+use json_ld_context_processing_next::{Options as ProcessingOptions, Process};
+use json_ld_core_next::{
 	context::inverse::{LangSelection, TypeSelection},
 	object::Any,
 	Context, Indexed, Loader, ProcessingMode, Term, Value,
 };
-use json_ld_syntax::{ContainerKind, ErrorCode, Keyword};
+use json_ld_syntax_next::{ContainerKind, ErrorCode, Keyword};
 use json_syntax::object::Entry;
 use mown::Mown;
 use rdf_types::{vocabulary, VocabularyMut};
@@ -38,7 +38,7 @@ pub enum Error {
 	InvalidNestValue,
 
 	#[error("Context processing failed: {0}")]
-	ContextProcessing(json_ld_context_processing::Error),
+	ContextProcessing(json_ld_context_processing_next::Error),
 }
 
 impl Error {
@@ -51,8 +51,8 @@ impl Error {
 	}
 }
 
-impl From<json_ld_context_processing::Error> for Error {
-	fn from(e: json_ld_context_processing::Error) -> Self {
+impl From<json_ld_context_processing_next::Error> for Error {
+	fn from(e: json_ld_context_processing_next::Error) -> Self {
 		Self::ContextProcessing(e)
 	}
 }
@@ -92,17 +92,17 @@ impl Options {
 	}
 }
 
-impl From<Options> for json_ld_context_processing::Options {
-	fn from(options: Options) -> json_ld_context_processing::Options {
-		json_ld_context_processing::Options {
+impl From<Options> for json_ld_context_processing_next::Options {
+	fn from(options: Options) -> json_ld_context_processing_next::Options {
+		json_ld_context_processing_next::Options {
 			processing_mode: options.processing_mode,
 			..Default::default()
 		}
 	}
 }
 
-impl From<json_ld_expansion::Options> for Options {
-	fn from(options: json_ld_expansion::Options) -> Options {
+impl From<json_ld_expansion_next::Options> for Options {
+	fn from(options: json_ld_expansion_next::Options) -> Options {
 		Options {
 			processing_mode: options.processing_mode,
 			ordered: options.ordered,
@@ -262,7 +262,7 @@ impl<I, B, T: Any<I, B>> CompactIndexedFragment<I, B> for T {
 		B: Clone + Hash + Eq,
 		L: Loader,
 	{
-		use json_ld_core::object::Ref;
+		use json_ld_core_next::object::Ref;
 		match self.as_ref() {
 			Ref::Value(value) => {
 				compact_indexed_value_with(
@@ -433,7 +433,7 @@ fn add_value(map: &mut json_syntax::Object, key: &str, value: json_syntax::Value
 
 /// Get the `@value` field of a value object.
 fn value_value<I>(value: &Value<I>) -> json_syntax::Value {
-	use json_ld_core::object::Literal;
+	use json_ld_core_next::object::Literal;
 	match value {
 		Value::Literal(lit, _ty) => match lit {
 			Literal::Null => json_syntax::Value::Null,

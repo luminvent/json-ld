@@ -1,10 +1,10 @@
 use crate::{expand_iri, Action, ExpandedEntry, Warning, WarningHandler};
-use json_ld_context_processing::algorithm::RejectVocab;
-use json_ld_core::{
+use json_ld_context_processing_next::algorithm::RejectVocab;
+use json_ld_core_next::{
 	object::value::Literal, Context, Environment, Id, Indexed, IndexedObject, LangString, Object,
 	Term, ValidId, Value,
 };
-use json_ld_syntax::{Direction, ErrorCode, Keyword, LenientLangTagBuf, Nullable};
+use json_ld_syntax_next::{Direction, ErrorCode, Keyword, LenientLangTagBuf, Nullable};
 use rdf_types::VocabularyMut;
 
 #[derive(Debug, thiserror::Error)]

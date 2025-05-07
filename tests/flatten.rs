@@ -1,9 +1,9 @@
 use contextual::WithContext;
-use json_ld::{JsonLdProcessor, Loader, Print, RemoteDocument, RemoteDocumentReference};
+use json_ld_next::{JsonLdProcessor, Loader, Print, RemoteDocument, RemoteDocumentReference};
 use rdf_types::vocabulary::{IndexVocabulary, IriIndex, IriVocabularyMut};
 use static_iref::iri;
 
-#[json_ld_testing::test_suite("https://w3c.github.io/json-ld-api/tests/flatten-manifest.jsonld")]
+#[json_ld_testing_next::test_suite("https://w3c.github.io/json-ld-api/tests/flatten-manifest.jsonld")]
 #[mount("https://w3c.github.io/json-ld-api", "tests/json-ld-api")]
 #[iri_prefix("rdf" = "http://www.w3.org/1999/02/22-rdf-syntax-ns#")]
 #[iri_prefix("rdfs" = "http://www.w3.org/2000/01/rdf-schema#")]
@@ -55,7 +55,7 @@ mod flatten {
 		pub expand_context: Option<&'static Iri>,
 
 		#[iri("test:processingMode")]
-		pub processing_mode: Option<json_ld::ProcessingMode>,
+		pub processing_mode: Option<json_ld_next::ProcessingMode>,
 
 		#[iri("test:specVersion")]
 		pub spec_version: Option<&'static str>,
@@ -96,13 +96,13 @@ impl flatten::Test {
 		}
 
 		let mut vocabulary: IndexVocabulary = IndexVocabulary::new();
-		let mut loader = json_ld::FsLoader::default();
+		let mut loader = json_ld_next::FsLoader::default();
 		loader.mount(
 			iri!("https://w3c.github.io/json-ld-api").to_owned(),
 			"tests/json-ld-api",
 		);
 
-		let mut options: json_ld::Options<IriIndex> = json_ld::Options::default();
+		let mut options: json_ld_next::Options<IriIndex> = json_ld_next::Options::default();
 		if let Some(p) = self.options.processing_mode {
 			options.processing_mode = p
 		}
@@ -147,7 +147,7 @@ impl flatten::Test {
 					let mut expect = loader.load_with(&mut vocabulary, expect).await.unwrap();
 					expect.set_url(Some(input));
 
-					let expand_options: json_ld::Options<IriIndex> = json_ld::Options::default();
+					let expand_options: json_ld_next::Options<IriIndex> = json_ld_next::Options::default();
 					let success = flattened
 						.compare_full(&expect, &mut vocabulary, &mut loader, expand_options, ())
 						.await

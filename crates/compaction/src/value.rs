@@ -1,7 +1,7 @@
 use crate::{compact_iri, compact_key, Error, Options};
-use json_ld_context_processing::{Options as ProcessingOptions, Process};
-use json_ld_core::{object, Container, ContainerKind, Context, Id, Loader, Term, Type, Value};
-use json_ld_syntax::Keyword;
+use json_ld_context_processing_next::{Options as ProcessingOptions, Process};
+use json_ld_core_next::{object, Container, ContainerKind, Context, Id, Loader, Term, Type, Value};
+use json_ld_syntax_next::Keyword;
 use mown::Mown;
 use rdf_types::VocabularyMut;
 use std::hash::Hash;

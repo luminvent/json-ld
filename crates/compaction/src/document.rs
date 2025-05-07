@@ -1,5 +1,5 @@
-use json_ld_core::{ExpandedDocument, FlattenedDocument, Loader, Term};
-use json_ld_syntax::{IntoJson, Keyword};
+use json_ld_core_next::{ExpandedDocument, FlattenedDocument, Loader, Term};
+use json_ld_syntax_next::{IntoJson, Keyword};
 use rdf_types::{vocabulary, Vocabulary};
 use std::hash::Hash;
 
@@ -21,7 +21,7 @@ pub trait EmbedContext {
 	fn embed_context<N>(
 		&mut self,
 		vocabulary: &N,
-		context: json_ld_context_processing::ProcessedRef<N::Iri, N::BlankId>,
+		context: json_ld_context_processing_next::ProcessedRef<N::Iri, N::BlankId>,
 		options: crate::Options,
 	) -> Result<(), IriConfusedWithPrefix>
 	where
@@ -37,7 +37,7 @@ pub trait Compact<I, B> {
 	async fn compact_full<'a, N, L>(
 		&'a self,
 		vocabulary: &'a mut N,
-		context: json_ld_context_processing::ProcessedRef<'a, 'a, I, B>,
+		context: json_ld_context_processing_next::ProcessedRef<'a, 'a, I, B>,
 		loader: &'a L,
 		options: crate::Options,
 	) -> CompactDocumentResult
@@ -53,7 +53,7 @@ pub trait Compact<I, B> {
 	async fn compact_with<'a, N, L>(
 		&'a self,
 		vocabulary: &'a mut N,
-		context: json_ld_context_processing::ProcessedRef<'a, 'a, I, B>,
+		context: json_ld_context_processing_next::ProcessedRef<'a, 'a, I, B>,
 		loader: &'a L,
 	) -> CompactDocumentResult
 	where
@@ -70,7 +70,7 @@ pub trait Compact<I, B> {
 	#[allow(async_fn_in_trait)]
 	async fn compact<'a, L>(
 		&'a self,
-		context: json_ld_context_processing::ProcessedRef<'a, 'a, I, B>,
+		context: json_ld_context_processing_next::ProcessedRef<'a, 'a, I, B>,
 		loader: &'a L,
 	) -> CompactDocumentResult
 	where
@@ -88,7 +88,7 @@ impl<I, B> Compact<I, B> for ExpandedDocument<I, B> {
 	async fn compact_full<'a, N, L>(
 		&'a self,
 		vocabulary: &'a mut N,
-		context: json_ld_context_processing::ProcessedRef<'a, 'a, I, B>,
+		context: json_ld_context_processing_next::ProcessedRef<'a, 'a, I, B>,
 		loader: &'a L,
 		options: crate::Options,
 	) -> CompactDocumentResult
@@ -120,7 +120,7 @@ impl<I, B> Compact<I, B> for FlattenedDocument<I, B> {
 	async fn compact_full<'a, N, L>(
 		&'a self,
 		vocabulary: &'a mut N,
-		context: json_ld_context_processing::ProcessedRef<'a, 'a, I, B>,
+		context: json_ld_context_processing_next::ProcessedRef<'a, 'a, I, B>,
 		loader: &'a L,
 		options: crate::Options,
 	) -> CompactDocumentResult
@@ -151,7 +151,7 @@ impl EmbedContext for json_syntax::Value {
 	fn embed_context<N>(
 		&mut self,
 		vocabulary: &N,
-		context: json_ld_context_processing::ProcessedRef<N::Iri, N::BlankId>,
+		context: json_ld_context_processing_next::ProcessedRef<N::Iri, N::BlankId>,
 		options: crate::Options,
 	) -> Result<(), IriConfusedWithPrefix>
 	where

@@ -1,5 +1,5 @@
 use iref::Iri;
-use json_ld_core::{object::node::Multiset, Indexed, Node, Object};
+use json_ld_core_next::{object::node::Multiset, Indexed, Node, Object};
 use linked_data::{CowRdfTerm, LinkedDataResource};
 use rdf_types::{
 	interpretation::{
@@ -38,7 +38,7 @@ where
 		.map(CowRdfTerm::into_owned)
 	{
 		Some(Term::Literal(_)) => return Err(Error::InvalidNode),
-		Some(Term::Id(id)) => Some(json_ld_core::Id::Valid(id)),
+		Some(Term::Id(id)) => Some(json_ld_core_next::Id::Valid(id)),
 		None => None,
 	};
 
@@ -57,7 +57,7 @@ impl<'a, I, V: Vocabulary> SerializeNode<'a, I, V> {
 	pub fn new(
 		vocabulary: &'a mut V,
 		interpretation: &'a mut I,
-		id: Option<json_ld_core::Id<V::Iri, V::BlankId>>,
+		id: Option<json_ld_core_next::Id<V::Iri, V::BlankId>>,
 	) -> Self {
 		let result = match id {
 			Some(id) => Node::with_id(id),
@@ -94,7 +94,7 @@ where
 			.lexical_representation(self.vocabulary, self.interpretation)
 			.map(CowRdfTerm::into_owned)
 		{
-			Some(Term::Id(id)) => json_ld_core::Id::Valid(id),
+			Some(Term::Id(id)) => json_ld_core_next::Id::Valid(id),
 			_ => return Err(Error::InvalidPredicate),
 		};
 
@@ -133,7 +133,7 @@ where
 			.lexical_representation(self.vocabulary, self.interpretation)
 			.map(CowRdfTerm::into_owned)
 		{
-			Some(Term::Id(id)) => json_ld_core::Id::Valid(id),
+			Some(Term::Id(id)) => json_ld_core_next::Id::Valid(id),
 			_ => return Err(Error::InvalidPredicate),
 		};
 
@@ -177,7 +177,7 @@ where
 
 pub(crate) fn into_type_value<I, B>(
 	obj: Indexed<Object<I, B>>,
-) -> Result<json_ld_core::Id<I, B>, Indexed<Object<I, B>>> {
+) -> Result<json_ld_core_next::Id<I, B>, Indexed<Object<I, B>>> {
 	match obj.index() {
 		Some(_) => Err(obj),
 		None => match obj.into_inner() {
@@ -193,12 +193,12 @@ pub(crate) fn into_type_value<I, B>(
 	}
 }
 
-pub(crate) fn is_iri<V, B>(vocabulary: &V, id: &json_ld_core::Id<V::Iri, B>, iri: &Iri) -> bool
+pub(crate) fn is_iri<V, B>(vocabulary: &V, id: &json_ld_core_next::Id<V::Iri, B>, iri: &Iri) -> bool
 where
 	V: IriVocabulary,
 {
 	match id {
-		json_ld_core::Id::Valid(rdf_types::Id::Iri(i)) => match vocabulary.iri(i) {
+		json_ld_core_next::Id::Valid(rdf_types::Id::Iri(i)) => match vocabulary.iri(i) {
 			Some(i) => i == iri,
 			None => false,
 		},

@@ -1,6 +1,6 @@
 use std::hash::Hash;
 
-use json_ld_core::{
+use json_ld_core_next::{
 	object::{
 		node::{Included, Multiset, Properties, ReverseProperties},
 		Graph, List,
@@ -56,7 +56,7 @@ where
 			let serializer = SerializeNode::new(
 				vocabulary,
 				interpretation,
-				Some(json_ld_core::Id::Valid(id)),
+				Some(json_ld_core_next::Id::Valid(id)),
 			);
 
 			Ok(Object::node(value.visit_subject(serializer)?))
@@ -72,7 +72,7 @@ where
 pub struct SerializeObject<'a, I, V: Vocabulary> {
 	vocabulary: &'a mut V,
 	interpretation: &'a mut I,
-	types: Vec<json_ld_core::Id<V::Iri, V::BlankId>>,
+	types: Vec<json_ld_core_next::Id<V::Iri, V::BlankId>>,
 	properties: Properties<V::Iri, V::BlankId>,
 	reverse_properties: ReverseProperties<V::Iri, V::BlankId>,
 	included: Included<V::Iri, V::BlankId>,
@@ -133,7 +133,7 @@ where
 					}
 				}
 
-				json_ld_core::Id::Valid(id)
+				json_ld_core_next::Id::Valid(id)
 			}
 			_ => return Err(Error::InvalidPredicate),
 		};
@@ -173,7 +173,7 @@ where
 			.lexical_representation(self.vocabulary, self.interpretation)
 			.map(CowRdfTerm::into_owned)
 		{
-			Some(Term::Id(id)) => json_ld_core::Id::Valid(id),
+			Some(Term::Id(id)) => json_ld_core_next::Id::Valid(id),
 			_ => return Err(Error::InvalidPredicate),
 		};
 
@@ -218,13 +218,13 @@ where
 			if let Some(item) = self.first {
 				let iri = self.vocabulary.insert(RDF_FIRST);
 				self.properties
-					.insert(json_ld_core::Id::Valid(Id::Iri(iri)), Indexed::none(item))
+					.insert(json_ld_core_next::Id::Valid(Id::Iri(iri)), Indexed::none(item))
 			}
 
 			if let Some(rest) = self.rest {
 				let iri = self.vocabulary.insert(RDF_REST);
 				self.properties.insert(
-					json_ld_core::Id::Valid(Id::Iri(iri)),
+					json_ld_core_next::Id::Valid(Id::Iri(iri)),
 					Indexed::none(Object::List(List::new(rest))),
 				)
 			}

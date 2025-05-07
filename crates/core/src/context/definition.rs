@@ -2,7 +2,7 @@ use super::{IntoSyntax, Nest};
 use crate::{Container, Direction, LenientLangTagBuf, Nullable, Term, Type};
 use contextual::WithContext;
 use iref::IriBuf;
-use json_ld_syntax::{
+use json_ld_syntax_next::{
 	context::{
 		definition::{Key, TypeContainer},
 		term_definition::Index,
@@ -300,8 +300,8 @@ impl TypeTermDefinition {
 		ModuloProtected(self)
 	}
 
-	pub fn into_syntax_definition(self) -> json_ld_syntax::context::definition::Type {
-		json_ld_syntax::context::definition::Type {
+	pub fn into_syntax_definition(self) -> json_ld_syntax_next::context::definition::Type {
+		json_ld_syntax_next::context::definition::Type {
 			container: self.container,
 			protected: if self.protected { Some(true) } else { None },
 		}
@@ -365,7 +365,7 @@ impl<T, B> TermDefinition<T, B> {
 		}
 	}
 
-	pub fn context(&self) -> Option<&json_ld_syntax::context::Context> {
+	pub fn context(&self) -> Option<&json_ld_syntax_next::context::Context> {
 		match self {
 			Self::Type(_) => None,
 			Self::Normal(d) => d.context.as_deref(),
@@ -465,7 +465,7 @@ impl<'a, T, B> TermDefinitionRef<'a, T, B> {
 		}
 	}
 
-	pub fn context(&self) -> Option<&'a json_ld_syntax::context::Context> {
+	pub fn context(&self) -> Option<&'a json_ld_syntax_next::context::Context> {
 		match self {
 			Self::Type(_) => None,
 			Self::Normal(d) => d.context.as_deref(),
@@ -542,7 +542,7 @@ pub struct NormalTermDefinition<T = IriBuf, B = BlankIdBuf> {
 	pub base_url: Option<T>,
 
 	// Optional context.
-	pub context: Option<Box<json_ld_syntax::context::Context>>,
+	pub context: Option<Box<json_ld_syntax_next::context::Context>>,
 
 	// Container mapping.
 	pub container: Container,
@@ -575,8 +575,8 @@ impl<T, B> NormalTermDefinition<T, B> {
 	pub fn into_syntax_definition(
 		self,
 		vocabulary: &impl Vocabulary<Iri = T, BlankId = B>,
-	) -> Nullable<json_ld_syntax::context::TermDefinition> {
-		use json_ld_syntax::context::term_definition::{Id, Type as SyntaxType, TypeKeyword};
+	) -> Nullable<json_ld_syntax_next::context::TermDefinition> {
+		use json_ld_syntax_next::context::term_definition::{Id, Type as SyntaxType, TypeKeyword};
 
 		fn term_into_id<T, B>(
 			vocabulary: &impl Vocabulary<Iri = T, BlankId = B>,
@@ -621,7 +621,7 @@ impl<T, B> NormalTermDefinition<T, B> {
 
 		let container = self.container.into_syntax();
 
-		json_ld_syntax::context::term_definition::Expanded {
+		json_ld_syntax_next::context::term_definition::Expanded {
 			id,
 			type_: self
 				.typ

@@ -1,5 +1,5 @@
 use iref::IriRef;
-use json_ld_syntax as syntax;
+use json_ld_syntax_next as syntax;
 use syntax::Nullable;
 
 pub struct Merged<'a> {

@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-testing"
+name = "json-ld-testing-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -15,7 +15,7 @@ proc-macro = true
 path = "src/lib.rs"
 
 [dependencies]
-json-ld.workspace = true
+json-ld-next.workspace = true
 iref.workspace = true
 static-iref.workspace = true
 iref-enum.workspace = true

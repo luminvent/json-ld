@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-syntax"
+name = "json-ld-syntax-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true

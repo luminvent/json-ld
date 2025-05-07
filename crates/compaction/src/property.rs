@@ -3,12 +3,12 @@ use crate::{
 	CompactFragment, CompactIndexedFragment, Error, Options,
 };
 
-use json_ld_core::{
+use json_ld_core_next::{
 	context::Nest,
 	object::{self, List},
 	Container, ContainerKind, Context, Id, Indexed, Loader, Node, Object, Term,
 };
-use json_ld_syntax::Keyword;
+use json_ld_syntax_next::Keyword;
 use rdf_types::VocabularyMut;
 use std::hash::Hash;
 
@@ -140,7 +140,7 @@ where
 		{
 			nest_result.insert(
 				item_active_property.into(),
-				json_ld_syntax::Object::default().into(),
+				json_ld_syntax_next::Object::default().into(),
 			);
 		}
 
@@ -181,7 +181,7 @@ where
 		{
 			nest_result.insert(
 				item_active_property.into(),
-				json_ld_syntax::Object::default().into(),
+				json_ld_syntax_next::Object::default().into(),
 			);
 		}
 

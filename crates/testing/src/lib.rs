@@ -3,7 +3,7 @@
 use async_std::task;
 use contextual::{DisplayWithContext, WithContext};
 use iref::{IriBuf, IriRefBuf};
-use json_ld::{Expand, FsLoader, LoadError, ValidId};
+use json_ld_next::{Expand, FsLoader, LoadError, ValidId};
 use proc_macro2::TokenStream;
 use proc_macro_error::proc_macro_error;
 use quote::quote;
@@ -478,11 +478,11 @@ fn parse_enum_type(
 enum Error {
 	Parse(syn::Error),
 	Load(LoadError),
-	Expand(json_ld::expansion::Error),
+	Expand(json_ld_next::expansion::Error),
 	InvalidIri(String),
 	InvalidValue(
 		Type,
-		json_ld::rdf::Value<IriIndex, BlankIdIndex, LiteralIndex>,
+		json_ld_next::rdf::Value<IriIndex, BlankIdIndex, LiteralIndex>,
 	),
 	InvalidTypeField,
 	NoTypeVariants(IndexTerm),
@@ -530,14 +530,14 @@ async fn generate_test_suite(
 	loader: FsLoader,
 	spec: TestSpec,
 ) -> Result<TokenStream, Box<Error>> {
-	use json_ld::{Loader, RdfQuads};
+	use json_ld_next::{Loader, RdfQuads};
 
 	let json_ld = loader
 		.load_with(vocabulary, spec.suite)
 		.await
 		.map_err(Error::Load)?;
 
-	let mut expanded_json_ld: json_ld::ExpandedDocument<IriIndex, BlankIdIndex> = json_ld
+	let mut expanded_json_ld: json_ld_next::ExpandedDocument<IriIndex, BlankIdIndex> = json_ld
 		.expand_with(vocabulary, &loader)
 		.await
 		.map_err(Error::Expand)?;
@@ -556,7 +556,7 @@ async fn generate_test_suite(
 				if *predicate
 					== IndexTerm::Id(ValidId::Iri(IriIndex::Iri(Vocab::Rdf(vocab::Rdf::Type))))
 				{
-					if let json_ld::rdf::Value::Id(ValidId::Iri(ty)) = object {
+					if let json_ld_next::rdf::Value::Id(ValidId::Iri(ty)) = object {
 						if let Some(type_id) = spec.type_map.get(ty) {
 							match spec.ignore.get(id) {
 								Some(link) => {
@@ -645,7 +645,7 @@ fn func_name(prefix: &str, id: &str) -> String {
 }
 
 fn quad_to_owned(
-	rdf_types::Quad(subject, predicate, object, graph): json_ld::rdf::QuadRef<
+	rdf_types::Quad(subject, predicate, object, graph): json_ld_next::rdf::QuadRef<
 		IriIndex,
 		BlankIdIndex,
 		LiteralIndex,

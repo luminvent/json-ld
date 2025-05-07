@@ -1,11 +1,11 @@
 use super::{expand_iri_simple, expand_iri_with, Environment, Merged};
 use crate::{Error, Options, ProcessingStack, Warning, WarningHandler};
 use iref::{Iri, IriRef};
-use json_ld_core::{
+use json_ld_core_next::{
 	context::{NormalTermDefinition, TypeTermDefinition},
 	Container, Context, Id, Loader, ProcessingMode, Term, Type, ValidId,
 };
-use json_ld_syntax::{
+use json_ld_syntax_next::{
 	context::{
 		definition::{EntryValueRef, KeyOrKeyword, KeyOrKeywordRef},
 		term_definition::{self, IdRef},
@@ -573,8 +573,8 @@ where
 							match container_value {
 								Nullable::Null
 								| Nullable::Some(
-									json_ld_syntax::Container::Many(_)
-									| json_ld_syntax::Container::One(
+									json_ld_syntax_next::Container::Many(_)
+									| json_ld_syntax_next::Container::One(
 										ContainerKind::Graph
 										| ContainerKind::Id
 										| ContainerKind::Type,

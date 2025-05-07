@@ -1,4 +1,4 @@
-use json_ld_core::{object::Literal, LangString, Value};
+use json_ld_core_next::{object::Literal, LangString, Value};
 use linked_data::RdfLiteral;
 use rdf_types::{vocabulary::IriVocabularyMut, LiteralType};
 use xsd_types::XSD_STRING;

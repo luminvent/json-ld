@@ -11,7 +11,7 @@ impl BuildHasher for DeterministicHasherBuilder {
 	}
 }
 
-use json_ld_syntax::IntoJsonWithContext;
+use json_ld_syntax_next::IntoJsonWithContext;
 
 /// Multi-set of values.
 #[derive(Debug, Clone)]

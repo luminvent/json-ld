@@ -4,12 +4,12 @@ use crate::{
 };
 use contextual::WithContext;
 use indexmap::IndexSet;
-use json_ld_context_processing::{Options as ProcessingOptions, Process};
-use json_ld_core::{
+use json_ld_context_processing_next::{Options as ProcessingOptions, Process};
+use json_ld_core_next::{
 	object, object::value::Literal, Container, Context, Environment, Id, Indexed, IndexedObject,
 	LangString, Loader, Node, Object, ProcessingMode, Term, Type, Value,
 };
-use json_ld_syntax::{ContainerKind, Keyword, LenientLangTagBuf, Nullable};
+use json_ld_syntax_next::{ContainerKind, Keyword, LenientLangTagBuf, Nullable};
 use json_syntax::object::Entry;
 use mown::Mown;
 use rdf_types::VocabularyMut;

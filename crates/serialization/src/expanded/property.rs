@@ -1,6 +1,6 @@
 use std::hash::Hash;
 
-use json_ld_core::{object::node::Multiset, Indexed, IndexedNode, IndexedObject};
+use json_ld_core_next::{object::node::Multiset, Indexed, IndexedNode, IndexedObject};
 use linked_data::LinkedDataResource;
 use rdf_types::{
 	interpretation::{

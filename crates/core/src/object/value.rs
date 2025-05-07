@@ -1,7 +1,7 @@
 use crate::{object, Direction, LangString, LenientLangTag};
 use educe::Educe;
 use iref::{Iri, IriBuf};
-use json_ld_syntax::{IntoJsonWithContext, Keyword};
+use json_ld_syntax_next::{IntoJsonWithContext, Keyword};
 use json_syntax::{Number, NumberBuf};
 use rdf_types::vocabulary::{IriVocabulary, IriVocabularyMut};
 use std::{hash::Hash, marker::PhantomData};

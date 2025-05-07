@@ -1,4 +1,4 @@
-use json_ld_core::IndexedObject;
+use json_ld_core_next::IndexedObject;
 
 pub enum Expanded<T, B> {
 	Null,

@@ -6,8 +6,8 @@
 //! The expansion algorithm is provided by the [`Expand`] trait.
 use std::hash::Hash;
 
-use json_ld_context_processing::Context;
-use json_ld_core::{Environment, ExpandedDocument, Loader, RemoteDocument};
+use json_ld_context_processing_next::Context;
+use json_ld_core_next::{Environment, ExpandedDocument, Loader, RemoteDocument};
 use json_syntax::Value;
 use rdf_types::{vocabulary, vocabulary::BlankIdVocabulary, BlankIdBuf, VocabularyMut};
 
@@ -30,7 +30,7 @@ pub use warning::*;
 pub(crate) use array::*;
 pub(crate) use document::filter_top_level_item;
 pub(crate) use element::*;
-pub(crate) use json_ld_context_processing::algorithm::expand_iri_simple as expand_iri;
+pub(crate) use json_ld_context_processing_next::algorithm::expand_iri_simple as expand_iri;
 pub(crate) use literal::*;
 pub(crate) use node::*;
 pub(crate) use value::*;
@@ -41,12 +41,12 @@ pub type ExpansionResult<T, B> = Result<ExpandedDocument<T, B>, Error>;
 /// Handler for the possible warnings emitted during the expansion
 /// of a JSON-LD document.
 pub trait WarningHandler<N: BlankIdVocabulary>:
-	json_ld_core::warning::Handler<N, Warning<N::BlankId>>
+	json_ld_core_next::warning::Handler<N, Warning<N::BlankId>>
 {
 }
 
 impl<N: BlankIdVocabulary, H> WarningHandler<N> for H where
-	H: json_ld_core::warning::Handler<N, Warning<N::BlankId>>
+	H: json_ld_core_next::warning::Handler<N, Warning<N::BlankId>>
 {
 }
 
@@ -60,7 +60,7 @@ impl<N: BlankIdVocabulary, H> WarningHandler<N> for H where
 /// # Example
 ///
 /// ```
-/// # mod json_ld { pub use json_ld_syntax as syntax; pub use json_ld_core::{RemoteDocument, ExpandedDocument, NoLoader}; pub use json_ld_expansion::Expand; };
+/// # mod json_ld { pub use json_ld_syntax_next as syntax; pub use json_ld_core_next::{RemoteDocument, ExpandedDocument, NoLoader}; pub use json_ld_expansion_next::Expand; };
 ///
 /// use iref::IriBuf;
 /// use rdf_types::BlankIdBuf;

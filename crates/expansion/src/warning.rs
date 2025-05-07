@@ -1,5 +1,5 @@
 use contextual::DisplayWithContext;
-use json_ld_context_processing::algorithm::MalformedIri;
+use json_ld_context_processing_next::algorithm::MalformedIri;
 use langtag::InvalidLangTag;
 use rdf_types::vocabulary::BlankIdVocabulary;
 use std::fmt;

@@ -139,7 +139,7 @@ pub enum ParseError {
 
 	/// JSON parse error.
 	#[error("JSON parse error: {0}")]
-	Json(json_ld_syntax::parse::Error),
+	Json(json_ld_syntax_next::parse::Error),
 }
 
 impl Loader for ReqwestLoader {

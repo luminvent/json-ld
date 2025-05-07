@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-serialization"
+name = "json-ld-serialization-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -12,7 +12,7 @@ documentation = "https://docs.rs/json-ld-serialization"
 readme = "README.md"
 
 [dependencies]
-json-ld-core.workspace = true
+json-ld-core-next.workspace = true
 linked-data.workspace = true
 iref.workspace = true
 rdf-types.workspace = true

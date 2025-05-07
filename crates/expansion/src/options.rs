@@ -1,6 +1,6 @@
-use json_ld_core::ProcessingMode;
+use json_ld_core_next::ProcessingMode;
 
-pub use json_ld_context_processing::algorithm::Action;
+pub use json_ld_context_processing_next::algorithm::Action;
 
 /// Expansion options.
 #[derive(Clone, Copy, Default)]
@@ -27,9 +27,9 @@ impl Options {
 	}
 }
 
-impl From<Options> for json_ld_context_processing::Options {
-	fn from(options: Options) -> json_ld_context_processing::Options {
-		json_ld_context_processing::Options {
+impl From<Options> for json_ld_context_processing_next::Options {
+	fn from(options: Options) -> json_ld_context_processing_next::Options {
+		json_ld_context_processing_next::Options {
 			processing_mode: options.processing_mode,
 			..Default::default()
 		}

@@ -44,7 +44,7 @@
 //! ```
 //! use iref::IriBuf;
 //! use static_iref::iri;
-//! use json_ld::{JsonLdProcessor, Options, RemoteDocument, syntax::{Value, Parse}};
+//! use json_ld_next::{JsonLdProcessor, Options, RemoteDocument, syntax::{Value, Parse}};
 //!
 //! # #[async_std::main]
 //! # async fn main() {
@@ -68,7 +68,7 @@
 //! );
 //!
 //! // Use `NoLoader` as we won't need to load any remote document.
-//! let mut loader = json_ld::NoLoader;
+//! let mut loader = json_ld_next::NoLoader;
 //!
 //! // Expand the "remote" document.
 //! let expanded = input
@@ -93,7 +93,7 @@
 //!
 //! ```
 //! use static_iref::iri;
-//! use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+//! use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 //!
 //! # #[async_std::main]
 //! # async fn main() {
@@ -101,7 +101,7 @@
 //!
 //! // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 //! // the local `example` directory. No HTTP query.
-//! let mut loader = json_ld::FsLoader::default();
+//! let mut loader = json_ld_next::FsLoader::default();
 //! loader.mount(iri!("https://example.com/").to_owned(), "examples");
 //!
 //! let expanded = input.expand(&mut loader)
@@ -117,7 +117,7 @@
 //!
 //! ```
 //! # use static_iref::iri;
-//! # use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference};
+//! # use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference};
 //! use rdf_types::{Subject, vocabulary::{IriVocabularyMut, IndexVocabulary}};
 //! use contextual::WithContext;
 //! # #[async_std::main]
@@ -131,7 +131,7 @@
 //!
 //! // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 //! // the local `example` directory. No HTTP query.
-//! let mut loader = json_ld::FsLoader::default();
+//! let mut loader = json_ld_next::FsLoader::default();
 //! loader.mount(iri!("https://example.com/").to_owned(), "examples");
 //!
 //! let expanded = input
@@ -180,7 +180,7 @@
 //!
 //! ```
 //! use static_iref::iri;
-//! use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, syntax::Print};
+//! use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, RemoteContextReference, syntax::Print};
 //!
 //! # #[async_std::main]
 //! # async fn main() {
@@ -190,7 +190,7 @@
 //!
 //! // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 //! // the local `example` directory. No HTTP query.
-//! let mut loader = json_ld::FsLoader::default();
+//! let mut loader = json_ld_next::FsLoader::default();
 //! loader.mount(iri!("https://example.com/").to_owned(), "examples");
 //!
 //! let compact = input
@@ -237,7 +237,7 @@
 //!
 //! ```
 //! use static_iref::iri;
-//! use json_ld::{JsonLdProcessor, Options, RemoteDocumentReference, syntax::Print};
+//! use json_ld_next::{JsonLdProcessor, Options, RemoteDocumentReference, syntax::Print};
 //!
 //! # #[async_std::main]
 //! # async fn main() {
@@ -245,7 +245,7 @@
 //!
 //! // Use `FsLoader` to redirect any URL starting with `https://example.com/` to
 //! // the local `example` directory. No HTTP query.
-//! let mut loader = json_ld::FsLoader::default();
+//! let mut loader = json_ld_next::FsLoader::default();
 //! loader.mount(iri!("https://example.com/").to_owned(), "examples");
 //!
 //! let mut generator = rdf_types::generator::Blank::new();
@@ -302,12 +302,12 @@
 //!
 //! [`contextual::DisplayWithContext`]: https://docs.rs/contextual/latest/contextual/trait.DisplayWithContext.html
 //! [`contextual::WithContext`]: https://docs.rs/contextual/latest/contextual/trait.WithContext.html
-pub use json_ld_compaction as compaction;
-pub use json_ld_context_processing as context_processing;
-pub use json_ld_core::*;
-pub use json_ld_expansion as expansion;
-pub use json_ld_serialization as ser;
-pub use json_ld_syntax as syntax;
+pub use json_ld_compaction_next as compaction;
+pub use json_ld_context_processing_next as context_processing;
+pub use json_ld_core_next::*;
+pub use json_ld_expansion_next as expansion;
+pub use json_ld_serialization_next as ser;
+pub use json_ld_syntax_next as syntax;
 
 pub use compaction::Compact;
 pub use context_processing::Process;

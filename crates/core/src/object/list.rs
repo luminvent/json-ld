@@ -2,7 +2,7 @@ use super::{Any, InvalidExpandedJson, MappedEq};
 use crate::{Id, IndexedObject, Relabel, TryFromJson};
 use contextual::WithContext;
 use educe::Educe;
-use json_ld_syntax::{IntoJson, IntoJsonWithContext};
+use json_ld_syntax_next::{IntoJson, IntoJsonWithContext};
 use rdf_types::{Generator, Subject, Vocabulary, VocabularyMut};
 use std::hash::Hash;
 

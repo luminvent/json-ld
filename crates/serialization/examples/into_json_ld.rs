@@ -1,5 +1,5 @@
 use contextual::WithContext;
-use json_ld_serialization::serialize;
+use json_ld_serialization_next::serialize;
 use json_syntax::Print;
 
 #[derive(linked_data::Serialize)]

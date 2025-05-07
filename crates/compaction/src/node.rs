@@ -1,8 +1,8 @@
 use crate::{add_value, compact_iri, compact_property, Error, Options};
 use contextual::WithContext;
-use json_ld_context_processing::{Options as ProcessingOptions, Process, ProcessingMode};
-use json_ld_core::{Container, ContainerKind, Context, Id, Loader, Node, Term, Type};
-use json_ld_syntax::Keyword;
+use json_ld_context_processing_next::{Options as ProcessingOptions, Process, ProcessingMode};
+use json_ld_core_next::{Container, ContainerKind, Context, Id, Loader, Node, Term, Type};
+use json_ld_syntax_next::Keyword;
 use mown::Mown;
 use rdf_types::VocabularyMut;
 use std::hash::Hash;

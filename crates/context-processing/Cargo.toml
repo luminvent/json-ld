@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-context-processing"
+name = "json-ld-context-processing-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -12,8 +12,8 @@ documentation = "https://docs.rs/json-ld-context-processing"
 readme = "README.md"
 
 [dependencies]
-json-ld-core.workspace = true
-json-ld-syntax.workspace = true
+json-ld-core-next.workspace = true
+json-ld-syntax-next.workspace = true
 iref.workspace = true
 rdf-types.workspace = true
 futures.workspace = true

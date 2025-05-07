@@ -4,8 +4,8 @@ use crate::{
 	Error, Options, Process, Processed, ProcessingResult, ProcessingStack, WarningHandler,
 };
 use iref::IriRef;
-use json_ld_core::{Context, Environment, ExtractContext, Loader, ProcessingMode, Term};
-use json_ld_syntax::{self as syntax, Nullable};
+use json_ld_core_next::{Context, Environment, ExtractContext, Loader, ProcessingMode, Term};
+use json_ld_syntax_next::{self as syntax, Nullable};
 use rdf_types::{vocabulary::IriVocabularyMut, VocabularyMut};
 
 mod define;

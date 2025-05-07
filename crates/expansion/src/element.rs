@@ -2,9 +2,9 @@ use crate::{
 	expand_array, expand_iri, expand_literal, expand_node, expand_value, Error, Expanded,
 	GivenLiteralValue, LiteralValue, Loader, Options, Warning, WarningHandler,
 };
-use json_ld_context_processing::{Options as ProcessingOptions, Process};
-use json_ld_core::{object, Context, Environment, Id, Indexed, Object, Term, ValidId};
-use json_ld_syntax::{Keyword, Nullable};
+use json_ld_context_processing_next::{Options as ProcessingOptions, Process};
+use json_ld_core_next::{object, Context, Environment, Id, Indexed, Object, Term, ValidId};
+use json_ld_syntax_next::{Keyword, Nullable};
 use json_syntax::{object::Entry, Value};
 use mown::Mown;
 use rdf_types::VocabularyMut;
@@ -36,7 +36,7 @@ impl<'a> ActiveProperty<'a> {
 	pub fn get_from<'c, T, B>(
 		&self,
 		context: &'c Context<T, B>,
-	) -> Option<json_ld_core::context::TermDefinitionRef<'c, T, B>> {
+	) -> Option<json_ld_core_next::context::TermDefinitionRef<'c, T, B>> {
 		match self {
 			Self::Some(s) => context.get(*s),
 			Self::None => None,
@@ -194,9 +194,9 @@ where
 				.get_unique("@context")
 				.map_err(Error::duplicate_key_ref)?
 			{
-				use json_ld_syntax::TryFromJson;
+				use json_ld_syntax_next::TryFromJson;
 				let local_context =
-					json_ld_syntax::context::Context::try_from_json(local_context.clone())?;
+					json_ld_syntax_next::context::Context::try_from_json(local_context.clone())?;
 
 				active_context = Mown::Owned(
 					local_context

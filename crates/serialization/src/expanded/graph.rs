@@ -1,6 +1,6 @@
 use std::hash::Hash;
 
-use json_ld_core::{object::Graph, Indexed};
+use json_ld_core_next::{object::Graph, Indexed};
 use linked_data::LinkedDataResource;
 use rdf_types::{
 	interpretation::{

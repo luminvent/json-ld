@@ -1,5 +1,5 @@
 use crate::object::{InvalidExpandedJson, TryFromJson, TryFromJsonObject};
-use json_ld_syntax::{IntoJson, IntoJsonWithContext};
+use json_ld_syntax_next::{IntoJson, IntoJsonWithContext};
 use rdf_types::VocabularyMut;
 use std::convert::{TryFrom, TryInto};
 use std::ops::{Deref, DerefMut};

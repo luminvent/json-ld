@@ -4,7 +4,7 @@ use contextual::{IntoRefWithContext, WithContext};
 use educe::Educe;
 use indexmap::IndexSet;
 use iref::IriBuf;
-use json_ld_syntax::{IntoJsonWithContext, Keyword};
+use json_ld_syntax_next::{IntoJsonWithContext, Keyword};
 use json_syntax::Number;
 use rdf_types::{BlankIdBuf, Generator, Subject, Vocabulary, VocabularyMut};
 use smallvec::SmallVec;

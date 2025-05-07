@@ -5,7 +5,7 @@
 //! [`linked_data::LinkedData`].
 use std::hash::Hash;
 
-use json_ld_core::{ExpandedDocument, Node, Object};
+use json_ld_core_next::{ExpandedDocument, Node, Object};
 
 use linked_data::{rdf_types::Vocabulary, LinkedData, LinkedDataResource, LinkedDataSubject};
 use rdf_types::{

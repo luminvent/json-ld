@@ -1,10 +1,10 @@
 use crate::{expand_iri, node_id_of_term, ActiveProperty, WarningHandler};
-use json_ld_context_processing::algorithm::{Action, RejectVocab};
-use json_ld_core::{
+use json_ld_context_processing_next::algorithm::{Action, RejectVocab};
+use json_ld_core_next::{
 	object::value::Literal, Context, Environment, IndexedObject, LangString, Node, Object, Type,
 	Value,
 };
-use json_ld_syntax::{ErrorCode, LenientLangTag, Nullable};
+use json_ld_syntax_next::{ErrorCode, LenientLangTag, Nullable};
 use json_syntax::Number;
 use rdf_types::VocabularyMut;
 
@@ -38,7 +38,7 @@ impl<'a> GivenLiteralValue<'a> {
 
 pub(crate) enum LiteralValue<'a> {
 	Given(GivenLiteralValue<'a>),
-	Inferred(json_ld_syntax::String),
+	Inferred(json_ld_syntax_next::String),
 }
 
 impl<'a> LiteralValue<'a> {

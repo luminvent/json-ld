@@ -4,7 +4,7 @@ use std::str::FromStr;
 use clap::Parser;
 use contextual::WithContext;
 use iref::IriBuf;
-use json_ld::{syntax::Parse, JsonLdProcessor, Print, RemoteDocument, RemoteDocumentReference};
+use json_ld_next::{syntax::Parse, JsonLdProcessor, Print, RemoteDocument, RemoteDocumentReference};
 use rdf_types::vocabulary::{IriIndex, IriVocabulary, IriVocabularyMut};
 
 #[derive(Parser)]
@@ -90,7 +90,7 @@ async fn main() {
 
 	let mut vocabulary: rdf_types::vocabulary::IndexVocabulary =
 		rdf_types::vocabulary::IndexVocabulary::new();
-	let loader = json_ld::loader::ReqwestLoader::new();
+	let loader = json_ld_next::loader::ReqwestLoader::new();
 
 	match args.command {
 		Command::Fetch { url } => {
@@ -123,13 +123,13 @@ async fn main() {
 		} => {
 			let remote_document = get_remote_document(&mut vocabulary, url_or_path, base_url);
 
-			let options = json_ld::Options {
-				expansion_policy: json_ld::expansion::Policy {
-					invalid: json_ld::expansion::Action::Reject,
+			let options = json_ld_next::Options {
+				expansion_policy: json_ld_next::expansion::Policy {
+					invalid: json_ld_next::expansion::Action::Reject,
 					vocab: if no_vocab {
-						json_ld::expansion::Action::Reject
+						json_ld_next::expansion::Action::Reject
 					} else {
-						json_ld::expansion::Action::Keep
+						json_ld_next::expansion::Action::Keep
 					},
 					allow_undefined: !no_undef,
 				},
@@ -200,7 +200,7 @@ fn get_remote_document(
 			let url = base_url.map(|iri| vocabulary.insert(iri.as_iri()));
 
 			match std::fs::read_to_string(path) {
-				Ok(content) => match json_ld::syntax::Value::parse_str(&content) {
+				Ok(content) => match json_ld_next::syntax::Value::parse_str(&content) {
 					Ok((document, _)) => RemoteDocumentReference::Loaded(RemoteDocument::new(
 						url,
 						Some("application/ld+json".parse().unwrap()),
@@ -221,7 +221,7 @@ fn get_remote_document(
 			let url = base_url.map(|iri| vocabulary.insert(iri.as_iri()));
 
 			match std::io::read_to_string(std::io::stdin()) {
-				Ok(content) => match json_ld::syntax::Value::parse_str(&content) {
+				Ok(content) => match json_ld_next::syntax::Value::parse_str(&content) {
 					Ok((document, _)) => RemoteDocumentReference::Loaded(RemoteDocument::new(
 						url,
 						Some("application/ld+json".parse().unwrap()),

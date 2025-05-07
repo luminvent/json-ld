@@ -7,7 +7,7 @@ use contextual::WithContext;
 use educe::Educe;
 use indexmap::IndexMap;
 use iref::IriBuf;
-use json_ld_syntax::IntoJsonWithContext;
+use json_ld_syntax_next::IntoJsonWithContext;
 use rdf_types::{BlankIdBuf, Vocabulary, VocabularyMut};
 use std::hash::{Hash, Hasher};
 

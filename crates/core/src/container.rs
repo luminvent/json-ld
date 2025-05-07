@@ -1,5 +1,5 @@
-pub use json_ld_syntax::ContainerKind;
-use json_ld_syntax::{context::definition::TypeContainer, Nullable};
+pub use json_ld_syntax_next::ContainerKind;
+use json_ld_syntax_next::{context::definition::TypeContainer, Nullable};
 
 pub struct InvalidContainer;
 
@@ -39,11 +39,11 @@ impl Container {
 		Container::None
 	}
 
-	pub fn from_syntax(r: Nullable<&json_ld_syntax::Container>) -> Result<Self, InvalidContainer> {
+	pub fn from_syntax(r: Nullable<&json_ld_syntax_next::Container>) -> Result<Self, InvalidContainer> {
 		match r {
 			Nullable::Null => Ok(Self::None),
-			Nullable::Some(json_ld_syntax::Container::One(c)) => Ok((*c).into()),
-			Nullable::Some(json_ld_syntax::Container::Many(m)) => {
+			Nullable::Some(json_ld_syntax_next::Container::One(c)) => Ok((*c).into()),
+			Nullable::Some(json_ld_syntax_next::Container::Many(m)) => {
 				let mut container = Container::new();
 
 				for t in m {
@@ -179,13 +179,13 @@ impl Container {
 		}
 	}
 
-	pub fn into_syntax(self) -> Option<json_ld_syntax::Container> {
+	pub fn into_syntax(self) -> Option<json_ld_syntax_next::Container> {
 		let slice = self.as_slice();
 
 		match slice.len() {
 			0 => None,
-			1 => Some(json_ld_syntax::Container::One(slice[0])),
-			_ => Some(json_ld_syntax::Container::Many(slice.to_vec())),
+			1 => Some(json_ld_syntax_next::Container::One(slice[0])),
+			_ => Some(json_ld_syntax_next::Container::Many(slice.to_vec())),
 		}
 	}
 }

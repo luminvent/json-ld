@@ -22,7 +22,7 @@ pub use self::reqwest::ReqwestLoader;
 
 pub type LoadingResult<I = IriBuf> = Result<RemoteDocument<I>, LoadError>;
 
-pub type RemoteContextReference<I = IriBuf> = RemoteDocumentReference<I, json_ld_syntax::Context>;
+pub type RemoteContextReference<I = IriBuf> = RemoteDocumentReference<I, json_ld_syntax_next::Context>;
 
 /// Remote document, loaded or not.
 ///
@@ -177,7 +177,7 @@ pub struct RemoteDocument<I = IriBuf, T = json_syntax::Value> {
 	pub document: T,
 }
 
-pub type RemoteContext<I = IriBuf> = RemoteDocument<I, json_ld_syntax::context::Context>;
+pub type RemoteContext<I = IriBuf> = RemoteDocument<I, json_ld_syntax_next::context::Context>;
 
 impl<I, T> RemoteDocument<I, T> {
 	/// Creates a new remote document.
@@ -513,7 +513,7 @@ pub enum ExtractContextError {
 
 	/// JSON syntax error.
 	#[error("JSON-LD context syntax error: {0}")]
-	Syntax(json_ld_syntax::context::InvalidContext),
+	Syntax(json_ld_syntax_next::context::InvalidContext),
 }
 
 impl ExtractContextError {
@@ -527,19 +527,19 @@ impl ExtractContextError {
 }
 
 pub trait ExtractContext {
-	fn into_ld_context(self) -> Result<json_ld_syntax::context::Context, ExtractContextError>;
+	fn into_ld_context(self) -> Result<json_ld_syntax_next::context::Context, ExtractContextError>;
 }
 
 impl ExtractContext for json_syntax::Value {
-	fn into_ld_context(self) -> Result<json_ld_syntax::context::Context, ExtractContextError> {
+	fn into_ld_context(self) -> Result<json_ld_syntax_next::context::Context, ExtractContextError> {
 		match self {
 			Self::Object(mut o) => match o
 				.remove_unique("@context")
 				.map_err(ExtractContextError::duplicate_context)?
 			{
 				Some(context) => {
-					use json_ld_syntax::TryFromJson;
-					json_ld_syntax::context::Context::try_from_json(context.value)
+					use json_ld_syntax_next::TryFromJson;
+					json_ld_syntax_next::context::Context::try_from_json(context.value)
 						.map_err(ExtractContextError::Syntax)
 				}
 				None => Err(ExtractContextError::NoContext),

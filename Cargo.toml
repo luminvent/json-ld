@@ -1,5 +1,5 @@
 [package]
-name = "json-ld"
+name = "json-ld-next"
 edition.workspace = true
 authors.workspace = true
 categories.workspace = true
@@ -13,16 +13,16 @@ description = "JSON-LD implementation"
 readme = "README.md"
 
 [features]
-reqwest = ["json-ld-core/reqwest"]
-serde = ["json-ld-syntax/serde", "json-ld-core/serde"]
+reqwest = ["json-ld-core-next/reqwest"]
+serde = ["json-ld-syntax-next/serde", "json-ld-core-next/serde"]
 
 [dependencies]
-json-ld-syntax.workspace = true
-json-ld-core.workspace = true
-json-ld-context-processing.workspace = true
-json-ld-expansion.workspace = true
-json-ld-compaction.workspace = true
-json-ld-serialization.workspace = true
+json-ld-syntax-next.workspace = true
+json-ld-core-next.workspace = true
+json-ld-context-processing-next.workspace = true
+json-ld-expansion-next.workspace = true
+json-ld-compaction-next.workspace = true
+json-ld-serialization-next.workspace = true
 json-syntax.workspace = true
 futures.workspace = true
 locspan.workspace = true
@@ -32,7 +32,7 @@ contextual.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]
-json-ld-testing.workspace = true
+json-ld-testing-next.workspace = true
 log.workspace = true
 async-std = { workspace = true, features = ["attributes"] }
 iref.workspace = true
@@ -62,14 +62,14 @@ rust-version = "1.77.0"
 version = "0.21.1"
 
 [workspace.dependencies]
-json-ld = { path = ".", version = "0.21.1" }
-json-ld-syntax = { path = "crates/syntax", version = "0.21.1" }
-json-ld-core = { path = "crates/core", version = "0.21.1" }
-json-ld-context-processing = { path = "crates/context-processing", version = "0.21.1" }
-json-ld-expansion = { path = "crates/expansion", version = "0.21.1" }
-json-ld-compaction = { path = "crates/compaction", version = "0.21.1" }
-json-ld-serialization = { path = "crates/serialization", version = "0.21.1" }
-json-ld-testing = { path = "crates/testing" }
+json-ld-next = { path = ".", version = "0.21.1" }
+json-ld-syntax-next = { path = "crates/syntax", version = "0.21.1" }
+json-ld-core-next = { path = "crates/core", version = "0.21.1" }
+json-ld-context-processing-next = { path = "crates/context-processing", version = "0.21.1" }
+json-ld-expansion-next = { path = "crates/expansion", version = "0.21.1" }
+json-ld-compaction-next = { path = "crates/compaction", version = "0.21.1" }
+json-ld-serialization-next = { path = "crates/serialization", version = "0.21.1" }
+json-ld-testing-next = { path = "crates/testing" }
 json-syntax = "0.12"
 iref = "3.1.2"
 static-iref = "3.0"

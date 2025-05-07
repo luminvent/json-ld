@@ -1,5 +1,5 @@
 [package]
-name = "json-ld-core"
+name = "json-ld-core-next"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -17,7 +17,7 @@ reqwest = ["bytes", "dep:reqwest", "utf8-decode", "reqwest-middleware"]
 serde = ["dep:serde", "json-syntax/serde"]
 
 [dependencies]
-json-ld-syntax.workspace = true
+json-ld-syntax-next.workspace = true
 json-syntax = { workspace = true, features = ["contextual", "canonicalize"] }
 rdf-types = { workspace = true, features = ["contextual"] }
 contextual.workspace = true

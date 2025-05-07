@@ -1,6 +1,6 @@
 use super::expand_element;
 use crate::{ActiveProperty, Error, Loader, Options, WarningHandler};
-use json_ld_core::{Context, Environment, ExpandedDocument, IndexedObject, Object};
+use json_ld_core_next::{Context, Environment, ExpandedDocument, IndexedObject, Object};
 use json_syntax::Value;
 use rdf_types::VocabularyMut;
 use std::hash::Hash;

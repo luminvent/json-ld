@@ -29,7 +29,7 @@ impl<I, B> Document<I, B> {
 		self.remote
 	}
 
-	pub fn into_compact(self) -> json_ld_syntax::Value {
+	pub fn into_compact(self) -> json_ld_syntax_next::Value {
 		self.remote.into_document()
 	}
 
@@ -46,7 +46,7 @@ impl<I, B> Document<I, B> {
 		&self.remote
 	}
 
-	pub fn as_compact(&self) -> &json_ld_syntax::Value {
+	pub fn as_compact(&self) -> &json_ld_syntax_next::Value {
 		self.remote.document()
 	}
 
@@ -69,8 +69,8 @@ impl<I, B> Borrow<RemoteDocument<I>> for Document<I, B> {
 	}
 }
 
-impl<I, B> Borrow<json_ld_syntax::Value> for Document<I, B> {
-	fn borrow(&self) -> &json_ld_syntax::Value {
+impl<I, B> Borrow<json_ld_syntax_next::Value> for Document<I, B> {
+	fn borrow(&self) -> &json_ld_syntax_next::Value {
 		self.remote.document()
 	}
 }

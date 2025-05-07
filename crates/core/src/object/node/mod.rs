@@ -4,7 +4,7 @@ use contextual::{IntoRefWithContext, WithContext};
 use educe::Educe;
 use indexmap::IndexSet;
 use iref::IriBuf;
-use json_ld_syntax::{IntoJson, IntoJsonWithContext, Keyword};
+use json_ld_syntax_next::{IntoJson, IntoJsonWithContext, Keyword};
 use rdf_types::{BlankIdBuf, Generator, Subject, Vocabulary, VocabularyMut};
 use std::convert::TryFrom;
 use std::hash::{Hash, Hasher};
@@ -533,9 +533,9 @@ impl<T: Eq + Hash, B: Eq + Hash> Node<T, B> {
 	///
 	/// # Example
 	/// ```
-	/// # use json_ld_syntax::Keyword;
-	/// # use json_ld_core::Term;
-	/// # let node: json_ld_core::Node = json_ld_core::Node::new();
+	/// # use json_ld_syntax_next::Keyword;
+	/// # use json_ld_core_next::Term;
+	/// # let node: json_ld_core_next::Node = json_ld_core_next::Node::new();
 	///
 	/// // Checks if the JSON object representation of the node has an `@id` key.
 	/// if node.has_key(&Term::Keyword(Keyword::Id)) {

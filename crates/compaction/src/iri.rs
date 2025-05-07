@@ -1,10 +1,10 @@
 use crate::{Options, TypeLangValue};
 use contextual::WithContext;
-use json_ld_core::{
+use json_ld_core_next::{
 	context::inverse::{LangSelection, Selection, TypeSelection},
 	object, Container, Context, Indexed, Nullable, Object, ProcessingMode, Term, Type, Value,
 };
-use json_ld_syntax::{is_keyword, is_keyword_like};
+use json_ld_syntax_next::{is_keyword, is_keyword_like};
 use rdf_types::Vocabulary;
 use std::hash::Hash;
 

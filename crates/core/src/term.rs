@@ -1,7 +1,7 @@
 use crate::{Id, ValidId};
 use contextual::{AsRefWithContext, DisplayWithContext, WithContext};
 use iref::IriBuf;
-use json_ld_syntax::Keyword;
+use json_ld_syntax_next::Keyword;
 use rdf_types::{vocabulary::Vocabulary, BlankIdBuf};
 use std::fmt;
 
