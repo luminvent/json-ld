@@ -4,7 +4,7 @@ use json_ld_core_next::{
 	rdf::{RDF_FIRST, RDF_REST},
 	Indexed, IndexedObject, Object,
 };
-use linked_data::{CowRdfTerm, LinkedDataResource};
+use linked_data_next::{CowRdfTerm, LinkedDataResource};
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
@@ -35,7 +35,7 @@ impl<'a, I, V: Vocabulary> SerializeList<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::SubjectVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
 	for SerializeList<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -51,7 +51,7 @@ where
 	fn predicate<L, T>(&mut self, predicate: &L, value: &T) -> Result<(), Self::Error>
 	where
 		L: ?Sized + LinkedDataResource<I, V>,
-		T: ?Sized + linked_data::LinkedDataPredicateObjects<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataPredicateObjects<I, V>,
 	{
 		let repr = predicate
 			.interpretation(self.vocabulary, self.interpretation)
@@ -82,21 +82,21 @@ where
 	fn reverse_predicate<L, T>(&mut self, _predicate: &L, _subjects: &T) -> Result<(), Self::Error>
 	where
 		L: ?Sized + LinkedDataResource<I, V>,
-		T: ?Sized + linked_data::LinkedDataPredicateObjects<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataPredicateObjects<I, V>,
 	{
 		Err(Error::ListReverseProperty)
 	}
 
 	fn graph<T>(&mut self, _value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + linked_data::LinkedDataGraph<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataGraph<I, V>,
 	{
 		Ok(())
 	}
 
 	fn include<T>(&mut self, _value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		Err(Error::ListInclude)
 	}
@@ -125,7 +125,7 @@ impl<'a, I, V: Vocabulary> SerializeListFirst<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::PredicateObjectsVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
 	for SerializeListFirst<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -140,7 +140,7 @@ where
 
 	fn object<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		self.result = Some(serialize_object_with(
 			self.vocabulary,
@@ -171,7 +171,7 @@ impl<'a, I, V: Vocabulary> SerializeListRest<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::PredicateObjectsVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
 	for SerializeListRest<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -186,7 +186,7 @@ where
 
 	fn object<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		let serializer = SerializeList::new(self.vocabulary, self.interpretation);
 		self.result = value.visit_subject(serializer)?;

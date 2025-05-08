@@ -13,7 +13,7 @@ readme = "README.md"
 
 [dependencies]
 json-ld-core-next.workspace = true
-linked-data.workspace = true
+linked-data-next.workspace = true
 iref.workspace = true
 rdf-types.workspace = true
 json-syntax.workspace = true
@@ -22,6 +22,6 @@ thiserror.workspace = true
 xsd-types = "0.9.1"
 
 [dev-dependencies]
-linked-data = { workspace = true, features = [ "derive" ] }
+linked-data-next = { workspace = true, features = [ "derive" ] }
 contextual.workspace = true
 json-syntax.workspace = true

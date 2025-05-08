@@ -1,4 +1,4 @@
-use linked_data::{
+use linked_data_next::{
 	LinkedData, LinkedDataGraph, LinkedDataPredicateObjects, LinkedDataResource, LinkedDataSubject,
 	ResourceInterpretation,
 };
@@ -31,7 +31,7 @@ where
 {
 	fn visit_subject<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::SubjectVisitor<I, V>,
+		S: linked_data_next::SubjectVisitor<I, V>,
 	{
 		if !self.types().is_empty() {
 			visitor.predicate(RDF_TYPE, &Types(self.types()))?;
@@ -74,7 +74,7 @@ where
 {
 	fn visit_objects<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		visitor.object(self)?;
 		visitor.end()
@@ -89,7 +89,7 @@ where
 {
 	fn visit_graph<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::GraphVisitor<I, V>,
+		S: linked_data_next::GraphVisitor<I, V>,
 	{
 		match self.graph() {
 			Some(g) => {
@@ -114,7 +114,7 @@ where
 {
 	fn visit<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::Visitor<I, V>,
+		S: linked_data_next::Visitor<I, V>,
 	{
 		if self.is_graph() {
 			visitor.named_graph(self)?;
@@ -137,7 +137,7 @@ where
 {
 	fn visit_objects<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		for ty in self.0 {
 			if let crate::Id::Valid(id) = ty {
@@ -160,7 +160,7 @@ where
 {
 	fn visit_objects<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		for object in self.0 {
 			visitor.object(object.inner())?;
@@ -181,7 +181,7 @@ where
 {
 	fn visit_objects<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		for node in self.0 {
 			visitor.object(node.inner())?;

@@ -1,7 +1,7 @@
 use hashbrown::HashSet;
 use iref::Iri;
 use json_syntax::Parse;
-use linked_data::{FromLinkedDataError, LinkedDataDeserialize};
+use linked_data_next::{FromLinkedDataError, LinkedDataDeserialize};
 use rdf_types::{
 	dataset::{PatternMatchingDataset, TraversableDataset},
 	interpretation::{
@@ -218,13 +218,13 @@ fn is_anonymous<I: ReverseTermInterpretation>(interpretation: &I, id: &I::Resour
 #[derive(Debug, thiserror::Error)]
 pub enum SerializationError {
 	#[error("invalid JSON")]
-	InvalidJson(linked_data::ContextIris, json_syntax::parse::Error),
+	InvalidJson(linked_data_next::ContextIris, json_syntax::parse::Error),
 
 	#[error("invalid boolean value")]
-	InvalidBoolean(linked_data::ContextIris, String),
+	InvalidBoolean(linked_data_next::ContextIris, String),
 
 	#[error("invalid number value")]
-	Number(linked_data::ContextIris, String),
+	Number(linked_data_next::ContextIris, String),
 }
 
 #[derive(Clone, Copy)]
@@ -241,7 +241,7 @@ impl<I, B> ExpandedDocument<I, B> {
 		quads: impl IntoIterator<
 			Item = Quad<&'a T::Resource, &'a T::Resource, &'a T::Resource, &'a T::Resource>,
 		>,
-		context: linked_data::Context<T>,
+		context: linked_data_next::Context<T>,
 	) -> Result<Self, SerializationError>
 	where
 		V: Vocabulary<Iri = I, BlankId = B>,
@@ -386,7 +386,7 @@ impl<I, B> ExpandedDocument<I, B> {
 			vocabulary,
 			interpretation,
 			quads,
-			linked_data::Context::default(),
+			linked_data_next::Context::default(),
 		)
 	}
 }
@@ -398,7 +398,7 @@ fn render_object<V, I>(
 	graph: &SerGraph<&I::Resource>,
 	id: &I::Resource,
 	resource: &SerResource<&I::Resource>,
-	context: linked_data::Context<I>,
+	context: linked_data_next::Context<I>,
 ) -> Result<IndexedObject<V::Iri, V::BlankId>, SerializationError>
 where
 	V: Vocabulary,
@@ -527,7 +527,7 @@ fn insert_property<'a, V, I, O>(
 	node: &mut Node<V::Iri, V::BlankId>,
 	prop: &I::Resource,
 	values: O,
-	context: linked_data::Context<I>,
+	context: linked_data_next::Context<I>,
 ) -> Result<(), SerializationError>
 where
 	V: Vocabulary,
@@ -580,7 +580,7 @@ fn render_object_or_reference<V, I>(
 	rdf_terms: RdfTerms<&I::Resource>,
 	graph: &SerGraph<&I::Resource>,
 	id: &I::Resource,
-	context: linked_data::Context<I>,
+	context: linked_data_next::Context<I>,
 ) -> Result<IndexedObject<V::Iri, V::BlankId>, SerializationError>
 where
 	V: Vocabulary,
@@ -613,7 +613,7 @@ fn render_reference<V, I>(
 	vocabulary: &V,
 	interpretation: &I,
 	id: &I::Resource,
-	context: linked_data::Context<I>,
+	context: linked_data_next::Context<I>,
 ) -> Result<IndexedObject<V::Iri, V::BlankId>, SerializationError>
 where
 	V: Vocabulary,
@@ -656,7 +656,7 @@ fn term_of<V, T>(
 	vocabulary: &V,
 	interpretation: &T,
 	resource: &T::Resource,
-	context: linked_data::Context<T>,
+	context: linked_data_next::Context<T>,
 ) -> Result<Option<ResourceTerm<V>>, SerializationError>
 where
 	V: Vocabulary,
@@ -732,7 +732,7 @@ where
 		vocabulary: &V,
 		interpretation: &I,
 		dataset: &(impl TraversableDataset<Resource = I::Resource> + PatternMatchingDataset),
-		context: linked_data::Context<I>,
+		context: linked_data_next::Context<I>,
 	) -> Result<Self, FromLinkedDataError> {
 		Self::from_interpreted_quads(vocabulary, interpretation, dataset.quads()).map_err(|_| {
 			FromLinkedDataError::InvalidLiteral(context.into_iris(vocabulary, interpretation))

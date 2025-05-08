@@ -90,4 +90,4 @@ indexmap = "2.0"
 iref-enum = "3.0"
 async-std = "1.12"
 
-linked-data = "0.1"
+linked-data-next = "0.1"

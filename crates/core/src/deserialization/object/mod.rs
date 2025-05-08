@@ -2,7 +2,7 @@ mod list;
 mod node;
 mod value;
 
-use linked_data::{
+use linked_data_next::{
 	LinkedData, LinkedDataGraph, LinkedDataPredicateObjects, LinkedDataResource, LinkedDataSubject,
 };
 use rdf_types::{vocabulary::IriVocabularyMut, Interpretation, Vocabulary};
@@ -18,7 +18,7 @@ where
 		&self,
 		vocabulary: &mut V,
 		interpretation: &mut I,
-	) -> linked_data::ResourceInterpretation<I, V> {
+	) -> linked_data_next::ResourceInterpretation<I, V> {
 		match self {
 			Self::Node(node) => node.interpretation(vocabulary, interpretation),
 			Self::List(list) => list.interpretation(vocabulary, interpretation),
@@ -35,7 +35,7 @@ where
 {
 	fn visit_subject<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::SubjectVisitor<I, V>,
+		S: linked_data_next::SubjectVisitor<I, V>,
 	{
 		match self {
 			Self::Node(node) => node.visit_subject(visitor),
@@ -54,7 +54,7 @@ where
 {
 	fn visit_objects<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		match self {
 			Self::Node(node) => node.visit_objects(visitor),
@@ -72,7 +72,7 @@ where
 {
 	fn visit_graph<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::GraphVisitor<I, V>,
+		S: linked_data_next::GraphVisitor<I, V>,
 	{
 		match self {
 			Self::Node(node) => node.visit_graph(visitor),
@@ -90,7 +90,7 @@ where
 {
 	fn visit<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::Visitor<I, V>,
+		S: linked_data_next::Visitor<I, V>,
 	{
 		match self {
 			Self::Node(node) => node.visit(visitor),

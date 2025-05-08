@@ -1,5 +1,5 @@
 use json_ld_core_next::{ExpandedDocument, Indexed, Node, Object};
-use linked_data::CowRdfTerm;
+use linked_data_next::CowRdfTerm;
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
@@ -41,7 +41,7 @@ impl<'a, I, V: Vocabulary> SerializeExpandedDocument<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::Visitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::Visitor<I, V>
 	for SerializeExpandedDocument<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -56,7 +56,7 @@ where
 
 	fn default_graph<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + linked_data::LinkedDataGraph<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataGraph<I, V>,
 	{
 		let serializer =
 			SerializeDefaultGraph::new(self.vocabulary, self.interpretation, &mut self.result);
@@ -66,7 +66,7 @@ where
 
 	fn named_graph<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + linked_data::LinkedDataResource<I, V> + linked_data::LinkedDataGraph<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataResource<I, V> + linked_data_next::LinkedDataGraph<I, V>,
 	{
 		let mut node = match value
 			.lexical_representation(self.vocabulary, self.interpretation)

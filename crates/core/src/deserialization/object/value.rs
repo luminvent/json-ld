@@ -1,4 +1,4 @@
-use linked_data::{
+use linked_data_next::{
 	xsd_types, CowRdfTerm, LinkedData, LinkedDataGraph, LinkedDataPredicateObjects,
 	LinkedDataResource, LinkedDataSubject, RdfLiteral, RdfLiteralRef, ResourceInterpretation,
 };
@@ -86,7 +86,7 @@ impl<V: Vocabulary, I: Interpretation> LinkedDataResource<I, V> for Value<V::Iri
 impl<T, V: Vocabulary, I: Interpretation> LinkedDataSubject<I, V> for Value<T> {
 	fn visit_subject<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::SubjectVisitor<I, V>,
+		S: linked_data_next::SubjectVisitor<I, V>,
 	{
 		visitor.end()
 	}
@@ -95,7 +95,7 @@ impl<T, V: Vocabulary, I: Interpretation> LinkedDataSubject<I, V> for Value<T> {
 impl<T, V: Vocabulary, I: Interpretation> LinkedDataPredicateObjects<I, V> for Value<T> {
 	fn visit_objects<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::PredicateObjectsVisitor<I, V>,
+		S: linked_data_next::PredicateObjectsVisitor<I, V>,
 	{
 		visitor.end()
 	}
@@ -104,7 +104,7 @@ impl<T, V: Vocabulary, I: Interpretation> LinkedDataPredicateObjects<I, V> for V
 impl<V: Vocabulary, I: Interpretation> LinkedDataGraph<I, V> for Value<V::Iri> {
 	fn visit_graph<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::GraphVisitor<I, V>,
+		S: linked_data_next::GraphVisitor<I, V>,
 	{
 		visitor.subject(self)?;
 		visitor.end()
@@ -114,7 +114,7 @@ impl<V: Vocabulary, I: Interpretation> LinkedDataGraph<I, V> for Value<V::Iri> {
 impl<V: Vocabulary, I: Interpretation> LinkedData<I, V> for Value<V::Iri> {
 	fn visit<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::Visitor<I, V>,
+		S: linked_data_next::Visitor<I, V>,
 	{
 		visitor.default_graph(self)?;
 		visitor.end()

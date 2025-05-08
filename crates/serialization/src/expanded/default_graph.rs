@@ -1,7 +1,7 @@
 use std::hash::Hash;
 
 use json_ld_core_next::{ExpandedDocument, Indexed, Object};
-use linked_data::{CowRdfTerm, LinkedDataResource};
+use linked_data_next::{CowRdfTerm, LinkedDataResource};
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
@@ -34,7 +34,7 @@ impl<'a, I, V: Vocabulary> SerializeDefaultGraph<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::GraphVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::GraphVisitor<I, V>
 	for SerializeDefaultGraph<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -49,7 +49,7 @@ where
 
 	fn subject<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		let id = match value
 			.lexical_representation(self.vocabulary, self.interpretation)

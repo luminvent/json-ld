@@ -1,6 +1,6 @@
 use iref::Iri;
 use json_ld_core_next::{object::node::Multiset, Indexed, Node, Object};
-use linked_data::{CowRdfTerm, LinkedDataResource};
+use linked_data_next::{CowRdfTerm, LinkedDataResource};
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
@@ -31,7 +31,7 @@ where
 	I: ReverseIriInterpretation<Iri = V::Iri>
 		+ ReverseBlankIdInterpretation<BlankId = V::BlankId>
 		+ ReverseLiteralInterpretation<Literal = V::Literal>,
-	T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+	T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 {
 	let id = match value
 		.lexical_representation(vocabulary, interpretation)
@@ -72,7 +72,7 @@ impl<'a, I, V: Vocabulary> SerializeNode<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::SubjectVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
 	for SerializeNode<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -88,7 +88,7 @@ where
 	fn predicate<L, T>(&mut self, predicate: &L, value: &T) -> Result<(), Self::Error>
 	where
 		L: ?Sized + LinkedDataResource<I, V>,
-		T: ?Sized + linked_data::LinkedDataPredicateObjects<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataPredicateObjects<I, V>,
 	{
 		let prop = match predicate
 			.lexical_representation(self.vocabulary, self.interpretation)
@@ -127,7 +127,7 @@ where
 	fn reverse_predicate<L, T>(&mut self, predicate: &L, value: &T) -> Result<(), Self::Error>
 	where
 		L: ?Sized + LinkedDataResource<I, V>,
-		T: ?Sized + linked_data::LinkedDataPredicateObjects<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataPredicateObjects<I, V>,
 	{
 		let prop = match predicate
 			.lexical_representation(self.vocabulary, self.interpretation)
@@ -149,7 +149,7 @@ where
 
 	fn include<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		let node = serialize_node_with(self.vocabulary, self.interpretation, value)?;
 
@@ -161,7 +161,7 @@ where
 
 	fn graph<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + linked_data::LinkedDataGraph<I, V>,
+		T: ?Sized + linked_data_next::LinkedDataGraph<I, V>,
 	{
 		let serializer = SerializeGraph::new(self.vocabulary, self.interpretation);
 

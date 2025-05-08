@@ -2,7 +2,7 @@ use std::ops::Deref;
 use std::{borrow::Borrow, hash::Hash};
 
 use iref::IriBuf;
-use linked_data::{LinkedData, LinkedDataGraph, LinkedDataResource, LinkedDataSubject};
+use linked_data_next::{LinkedData, LinkedDataGraph, LinkedDataResource, LinkedDataSubject};
 use rdf_types::{vocabulary::IriVocabularyMut, BlankIdBuf, Interpretation, Vocabulary};
 
 pub mod expanded;
@@ -107,7 +107,7 @@ where
 {
 	fn visit<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::Visitor<I, V>,
+		S: linked_data_next::Visitor<I, V>,
 	{
 		self.expanded.visit(visitor)
 	}
@@ -121,7 +121,7 @@ where
 {
 	fn visit_graph<S>(&self, visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::GraphVisitor<I, V>,
+		S: linked_data_next::GraphVisitor<I, V>,
 	{
 		self.expanded.visit_graph(visitor)
 	}

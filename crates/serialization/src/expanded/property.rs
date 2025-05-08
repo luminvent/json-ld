@@ -1,7 +1,7 @@
 use std::hash::Hash;
 
 use json_ld_core_next::{object::node::Multiset, Indexed, IndexedNode, IndexedObject};
-use linked_data::LinkedDataResource;
+use linked_data_next::LinkedDataResource;
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
@@ -30,7 +30,7 @@ impl<'a, I, V: Vocabulary> SerializeProperty<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::PredicateObjectsVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
 	for SerializeProperty<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -45,7 +45,7 @@ where
 
 	fn object<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		let object = serialize_object_with(self.vocabulary, self.interpretation, value)?;
 		self.result.insert(Indexed::none(object));
@@ -73,7 +73,7 @@ impl<'a, I, V: Vocabulary> SerializeReverseProperty<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data::PredicateObjectsVisitor<I, V>
+impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
 	for SerializeReverseProperty<'a, I, V>
 where
 	V: IriVocabularyMut,
@@ -88,7 +88,7 @@ where
 
 	fn object<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + LinkedDataResource<I, V> + linked_data::LinkedDataSubject<I, V>,
+		T: ?Sized + LinkedDataResource<I, V> + linked_data_next::LinkedDataSubject<I, V>,
 	{
 		let object = serialize_node_with(self.vocabulary, self.interpretation, value)?;
 		self.result.insert(Indexed::none(object));

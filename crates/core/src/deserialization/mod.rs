@@ -1,4 +1,4 @@
-use linked_data::{LinkedData, LinkedDataGraph, LinkedDataResource, LinkedDataSubject};
+use linked_data_next::{LinkedData, LinkedDataGraph, LinkedDataResource, LinkedDataSubject};
 use rdf_types::{vocabulary::IriVocabularyMut, Interpretation, Vocabulary};
 
 use crate::ExpandedDocument;
@@ -14,7 +14,7 @@ where
 {
 	fn visit_graph<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::GraphVisitor<I, V>,
+		S: linked_data_next::GraphVisitor<I, V>,
 	{
 		for object in self {
 			visitor.subject(object.inner())?;
@@ -32,7 +32,7 @@ where
 {
 	fn visit<S>(&self, mut visitor: S) -> Result<S::Ok, S::Error>
 	where
-		S: linked_data::Visitor<I, V>,
+		S: linked_data_next::Visitor<I, V>,
 	{
 		visitor.default_graph(self)?;
 		visitor.end()

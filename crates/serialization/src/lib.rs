@@ -1,13 +1,13 @@
 //! This crate implements JSON-LD serialization (from RDF dataset to JSON-LD)
-//! through the [`linked_data`](https://github.com/spruceid/linked-data-rs)
+//! through the [`linked_data_next`](https://github.com/spruceid/linked-data-rs)
 //! crate.
 //! The input value can be an RDF dataset, or any type implementing
-//! [`linked_data::LinkedData`].
+//! [`linked_data_next::LinkedData`].
 use std::hash::Hash;
 
 use json_ld_core_next::{ExpandedDocument, Node, Object};
 
-use linked_data::{rdf_types::Vocabulary, LinkedData, LinkedDataResource, LinkedDataSubject};
+use linked_data_next::{rdf_types::Vocabulary, LinkedData, LinkedDataResource, LinkedDataSubject};
 use rdf_types::{
 	interpretation::{
 		ReverseBlankIdInterpretation, ReverseIriInterpretation, ReverseLiteralInterpretation,
