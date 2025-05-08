@@ -609,8 +609,7 @@ pub struct ListTriplesWith<'a, 'n, V: Vocabulary, G: Generator<V>> {
 	inner: ListTriples<'a, V::Iri, V::BlankId, V::Literal>,
 }
 
-impl<N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator
-	for ListTriplesWith<'_, '_, N, G>
+impl<N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator for ListTriplesWith<'_, '_, N, G>
 where
 	N::Iri: AsRef<Iri> + Clone,
 	N::BlankId: Clone,

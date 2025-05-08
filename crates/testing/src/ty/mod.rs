@@ -97,7 +97,9 @@ impl Type {
 			}
 			Self::String => {
 				let s = match value {
-					json_ld_next::rdf::Value::Literal(lit) => vocabulary.literal(lit).unwrap().value,
+					json_ld_next::rdf::Value::Literal(lit) => {
+						vocabulary.literal(lit).unwrap().value
+					}
 					json_ld_next::rdf::Value::Id(id) => id.as_ref_with(vocabulary),
 				};
 

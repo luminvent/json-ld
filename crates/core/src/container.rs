@@ -39,7 +39,9 @@ impl Container {
 		Container::None
 	}
 
-	pub fn from_syntax(r: Nullable<&json_ld_syntax_next::Container>) -> Result<Self, InvalidContainer> {
+	pub fn from_syntax(
+		r: Nullable<&json_ld_syntax_next::Container>,
+	) -> Result<Self, InvalidContainer> {
 		match r {
 			Nullable::Null => Ok(Self::None),
 			Nullable::Some(json_ld_syntax_next::Container::One(c)) => Ok((*c).into()),

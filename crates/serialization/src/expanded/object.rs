@@ -217,8 +217,10 @@ where
 		} else {
 			if let Some(item) = self.first {
 				let iri = self.vocabulary.insert(RDF_FIRST);
-				self.properties
-					.insert(json_ld_core_next::Id::Valid(Id::Iri(iri)), Indexed::none(item))
+				self.properties.insert(
+					json_ld_core_next::Id::Valid(Id::Iri(iri)),
+					Indexed::none(item),
+				)
 			}
 
 			if let Some(rest) = self.rest {

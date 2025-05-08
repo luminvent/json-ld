@@ -4,7 +4,9 @@ use std::str::FromStr;
 use clap::Parser;
 use contextual::WithContext;
 use iref::IriBuf;
-use json_ld_next::{syntax::Parse, JsonLdProcessor, Print, RemoteDocument, RemoteDocumentReference};
+use json_ld_next::{
+	syntax::Parse, JsonLdProcessor, Print, RemoteDocument, RemoteDocumentReference,
+};
 use rdf_types::vocabulary::{IriIndex, IriVocabulary, IriVocabularyMut};
 
 #[derive(Parser)]

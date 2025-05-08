@@ -66,7 +66,9 @@ where
 
 	fn named_graph<T>(&mut self, value: &T) -> Result<(), Self::Error>
 	where
-		T: ?Sized + linked_data_next::LinkedDataResource<I, V> + linked_data_next::LinkedDataGraph<I, V>,
+		T: ?Sized
+			+ linked_data_next::LinkedDataResource<I, V>
+			+ linked_data_next::LinkedDataGraph<I, V>,
 	{
 		let mut node = match value
 			.lexical_representation(self.vocabulary, self.interpretation)

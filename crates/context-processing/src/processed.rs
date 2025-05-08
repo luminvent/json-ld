@@ -90,7 +90,10 @@ pub struct ProcessedOwned<T, B> {
 }
 
 impl<T, B> ProcessedOwned<T, B> {
-	pub fn new(unprocessed: json_ld_syntax_next::context::Context, processed: Context<T, B>) -> Self {
+	pub fn new(
+		unprocessed: json_ld_syntax_next::context::Context,
+		processed: Context<T, B>,
+	) -> Self {
 		Self {
 			unprocessed,
 			processed,

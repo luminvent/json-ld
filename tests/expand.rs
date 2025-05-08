@@ -3,7 +3,9 @@ use json_ld_next::{JsonLdProcessor, Loader, Print, RemoteDocumentReference, TryF
 use rdf_types::vocabulary::{IndexVocabulary, IriIndex, IriVocabularyMut};
 use static_iref::iri;
 
-#[json_ld_testing_next::test_suite("https://w3c.github.io/json-ld-api/tests/expand-manifest.jsonld")]
+#[json_ld_testing_next::test_suite(
+	"https://w3c.github.io/json-ld-api/tests/expand-manifest.jsonld"
+)]
 #[mount("https://w3c.github.io/json-ld-api", "tests/json-ld-api")]
 #[iri_prefix("rdf" = "http://www.w3.org/1999/02/22-rdf-syntax-ns#")]
 #[iri_prefix("rdfs" = "http://www.w3.org/2000/01/rdf-schema#")]
@@ -121,7 +123,8 @@ impl expand::Test {
 					.unwrap()
 					.into_document();
 				let expected =
-					json_ld_next::ExpandedDocument::try_from_json_in(&mut vocabulary, expected).unwrap();
+					json_ld_next::ExpandedDocument::try_from_json_in(&mut vocabulary, expected)
+						.unwrap();
 
 				let success = expanded == expected;
 

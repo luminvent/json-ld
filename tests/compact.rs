@@ -3,7 +3,9 @@ use json_ld_next::{JsonLdProcessor, Loader, Print, RemoteDocument, RemoteDocumen
 use rdf_types::vocabulary::{IndexVocabulary, IriIndex, IriVocabularyMut};
 use static_iref::iri;
 
-#[json_ld_testing_next::test_suite("https://w3c.github.io/json-ld-api/tests/compact-manifest.jsonld")]
+#[json_ld_testing_next::test_suite(
+	"https://w3c.github.io/json-ld-api/tests/compact-manifest.jsonld"
+)]
 #[mount("https://w3c.github.io/json-ld-api", "tests/json-ld-api")]
 #[iri_prefix("rdf" = "http://www.w3.org/1999/02/22-rdf-syntax-ns#")]
 #[iri_prefix("rdfs" = "http://www.w3.org/2000/01/rdf-schema#")]
@@ -133,7 +135,8 @@ impl compact::Test {
 				let mut expect = loader.load_with(&mut vocabulary, expect).await.unwrap();
 				expect.set_url(Some(input));
 
-				let expand_options: json_ld_next::Options<IriIndex> = json_ld_next::Options::default();
+				let expand_options: json_ld_next::Options<IriIndex> =
+					json_ld_next::Options::default();
 				let success = compacted
 					.compare_full(&expect, &mut vocabulary, &loader, expand_options, ())
 					.await
