@@ -72,8 +72,8 @@ impl<'a, I, V: Vocabulary> SerializeNode<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
-	for SerializeNode<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
+	for SerializeNode<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,

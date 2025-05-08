@@ -410,13 +410,13 @@ pub enum ValueEntryRef<'a> {
 	Json(&'a json_syntax::Value),
 }
 
-impl<'a> Clone for ValueEntryRef<'a> {
+impl Clone for ValueEntryRef<'_> {
 	fn clone(&self) -> Self {
 		*self
 	}
 }
 
-impl<'a> Copy for ValueEntryRef<'a> {}
+impl Copy for ValueEntryRef<'_> {}
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum EntryKey {
@@ -500,9 +500,9 @@ impl<'a, T> Iterator for Entries<'a, T> {
 	}
 }
 
-impl<'a, T> ExactSizeIterator for Entries<'a, T> {}
+impl<T> ExactSizeIterator for Entries<'_, T> {}
 
-impl<'a, T> DoubleEndedIterator for Entries<'a, T> {
+impl<T> DoubleEndedIterator for Entries<'_, T> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.direction.take().map(EntryRef::Direction).or_else(|| {
 			self.language.take().map(EntryRef::Language).or_else(|| {

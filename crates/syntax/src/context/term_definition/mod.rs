@@ -484,7 +484,7 @@ pub enum EntryValueRef<'a> {
 	Protected(bool),
 }
 
-impl<'a> EntryValueRef<'a> {
+impl EntryValueRef<'_> {
 	pub fn is_object(&self) -> bool {
 		match self {
 			Self::Context(c) => c.is_object(),
@@ -598,7 +598,7 @@ impl<'a> Iterator for Entries<'a> {
 	}
 }
 
-impl<'a> ExactSizeIterator for Entries<'a> {}
+impl ExactSizeIterator for Entries<'_> {}
 
 /// Term definition fragment.
 pub enum FragmentRef<'a> {

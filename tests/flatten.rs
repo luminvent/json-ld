@@ -135,7 +135,7 @@ impl flatten::Test {
 							&mut vocabulary,
 							&mut generator,
 							context.clone(),
-							&mut loader,
+							&loader,
 							options.clone(),
 							(),
 						)
@@ -149,7 +149,7 @@ impl flatten::Test {
 
 					let expand_options: json_ld_next::Options<IriIndex> = json_ld_next::Options::default();
 					let success = flattened
-						.compare_full(&expect, &mut vocabulary, &mut loader, expand_options, ())
+						.compare_full(&expect, &mut vocabulary, &loader, expand_options, ())
 						.await
 						.unwrap();
 
@@ -182,7 +182,7 @@ impl flatten::Test {
 								&mut vocabulary,
 								&mut generator,
 								context,
-								&mut loader,
+								&loader,
 								options,
 								(),
 							)

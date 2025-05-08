@@ -113,7 +113,7 @@ impl<'a> Iterator for Entries<'a> {
 	}
 }
 
-impl<'a> ExactSizeIterator for Entries<'a> {}
+impl ExactSizeIterator for Entries<'_> {}
 
 pub enum EntryValueRef<'a> {
 	Base(Nullable<&'a IriRef>),

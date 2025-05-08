@@ -17,7 +17,7 @@ pub(crate) enum ActiveProperty<'a> {
 	None,
 }
 
-impl<'a> ActiveProperty<'a> {
+impl ActiveProperty<'_> {
 	// pub fn as_str(&self) -> Option<&'a str> {
 	// 	match self {
 	// 		Self::Some(Meta(s, _)) => Some(s),
@@ -44,15 +44,15 @@ impl<'a> ActiveProperty<'a> {
 	}
 }
 
-impl<'a> Clone for ActiveProperty<'a> {
+impl Clone for ActiveProperty<'_> {
 	fn clone(&self) -> Self {
 		*self
 	}
 }
 
-impl<'a> Copy for ActiveProperty<'a> {}
+impl Copy for ActiveProperty<'_> {}
 
-impl<'a> PartialEq<Keyword> for ActiveProperty<'a> {
+impl PartialEq<Keyword> for ActiveProperty<'_> {
 	fn eq(&self, other: &Keyword) -> bool {
 		match self {
 			Self::Some(s) => *s == other.into_str(),

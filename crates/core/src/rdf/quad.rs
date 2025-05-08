@@ -137,7 +137,7 @@ pub struct ClonedQuads<'a, N: Vocabulary, G: Generator<N>> {
 	inner: Quads<'a, N, G>,
 }
 
-impl<'a, N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator for ClonedQuads<'a, N, G>
+impl<N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator for ClonedQuads<'_, N, G>
 where
 	N::Iri: Clone,
 	N::BlankId: Clone,

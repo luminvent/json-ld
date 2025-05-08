@@ -19,7 +19,7 @@ impl<'n, N: Vocabulary, G> Environment<'n, N, G> {
 	}
 }
 
-impl<'n, V: Vocabulary, G: Generator<V>> Environment<'n, V, G>
+impl<V: Vocabulary, G: Generator<V>> Environment<'_, V, G>
 where
 	V::Iri: Clone,
 	V::BlankId: Clone + Hash + Eq,

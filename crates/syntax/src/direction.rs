@@ -4,7 +4,7 @@ use std::{fmt, str::FromStr};
 #[error("invalid JSON-LD text direction `{0}`")]
 pub struct InvalidDirection<T>(pub T);
 
-impl<'a, T: ?Sized + ToOwned> InvalidDirection<&'a T> {
+impl<T: ?Sized + ToOwned> InvalidDirection<&T> {
 	pub fn into_owned(self) -> InvalidDirection<T::Owned> {
 		InvalidDirection(self.0.to_owned())
 	}
@@ -86,7 +86,7 @@ impl<'de> serde::Deserialize<'de> for Direction {
 	{
 		struct Visitor;
 
-		impl<'de> serde::de::Visitor<'de> for Visitor {
+		impl serde::de::Visitor<'_> for Visitor {
 			type Value = Direction;
 
 			fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {

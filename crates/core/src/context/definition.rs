@@ -46,7 +46,7 @@ impl<'a> BindingTerm<'a> {
 	}
 }
 
-impl<'a> fmt::Display for BindingTerm<'a> {
+impl fmt::Display for BindingTerm<'_> {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		self.as_str().fmt(f)
 	}
@@ -515,13 +515,13 @@ impl<'a, T, B> TermDefinitionRef<'a, T, B> {
 	}
 }
 
-impl<'a, T, B> Clone for TermDefinitionRef<'a, T, B> {
+impl<T, B> Clone for TermDefinitionRef<'_, T, B> {
 	fn clone(&self) -> Self {
 		*self
 	}
 }
 
-impl<'a, T, B> Copy for TermDefinitionRef<'a, T, B> {}
+impl<T, B> Copy for TermDefinitionRef<'_, T, B> {}
 
 // A term definition.
 #[derive(PartialEq, Eq, Clone)]
@@ -684,8 +684,8 @@ impl<T, B> Default for NormalTermDefinition<T, B> {
 /// Wrapper to consider a term definition without the `@protected` flag.
 pub struct ModuloProtected<T>(T);
 
-impl<'a, 'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<&'b NormalTermDefinition<T, B>>>
-	for ModuloProtected<&'a NormalTermDefinition<T, B>>
+impl<'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<&'b NormalTermDefinition<T, B>>>
+	for ModuloProtected<&NormalTermDefinition<T, B>>
 {
 	fn eq(&self, other: &ModuloProtected<&'b NormalTermDefinition<T, B>>) -> bool {
 		// NOTE we ignore the `protected` flag.
@@ -703,10 +703,10 @@ impl<'a, 'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<&'b NormalTer
 	}
 }
 
-impl<'a, T: Eq, B: Eq> Eq for ModuloProtected<&'a NormalTermDefinition<T, B>> {}
+impl<T: Eq, B: Eq> Eq for ModuloProtected<&NormalTermDefinition<T, B>> {}
 
-impl<'a, 'b> PartialEq<ModuloProtected<&'b TypeTermDefinition>>
-	for ModuloProtected<&'a TypeTermDefinition>
+impl<'b> PartialEq<ModuloProtected<&'b TypeTermDefinition>>
+	for ModuloProtected<&TypeTermDefinition>
 {
 	fn eq(&self, other: &ModuloProtected<&'b TypeTermDefinition>) -> bool {
 		// NOTE we ignore the `protected` flag.
@@ -714,10 +714,10 @@ impl<'a, 'b> PartialEq<ModuloProtected<&'b TypeTermDefinition>>
 	}
 }
 
-impl<'a> Eq for ModuloProtected<&'a TypeTermDefinition> {}
+impl Eq for ModuloProtected<&TypeTermDefinition> {}
 
-impl<'a, 'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<TermDefinitionRef<'b, T, B>>>
-	for ModuloProtected<TermDefinitionRef<'a, T, B>>
+impl<'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<TermDefinitionRef<'b, T, B>>>
+	for ModuloProtected<TermDefinitionRef<'_, T, B>>
 {
 	fn eq(&self, other: &ModuloProtected<TermDefinitionRef<'b, T, B>>) -> bool {
 		// NOTE we ignore the `protected` flag.
@@ -735,4 +735,4 @@ impl<'a, 'b, T: PartialEq, B: PartialEq> PartialEq<ModuloProtected<TermDefinitio
 	}
 }
 
-impl<'a, T: Eq, B: Eq> Eq for ModuloProtected<TermDefinitionRef<'a, T, B>> {}
+impl<T: Eq, B: Eq> Eq for ModuloProtected<TermDefinitionRef<'_, T, B>> {}

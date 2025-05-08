@@ -115,7 +115,7 @@ impl<'a> From<&'a Key> for KeyRef<'a> {
 	}
 }
 
-impl<'a> fmt::Display for KeyRef<'a> {
+impl fmt::Display for KeyRef<'_> {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		self.0.fmt(f)
 	}

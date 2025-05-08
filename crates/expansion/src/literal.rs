@@ -41,7 +41,7 @@ pub(crate) enum LiteralValue<'a> {
 	Inferred(json_ld_syntax_next::String),
 }
 
-impl<'a> LiteralValue<'a> {
+impl LiteralValue<'_> {
 	pub fn is_string(&self) -> bool {
 		match self {
 			Self::Given(v) => v.is_string(),

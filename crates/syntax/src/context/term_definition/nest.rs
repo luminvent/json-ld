@@ -80,7 +80,7 @@ impl<'de> serde::Deserialize<'de> for Nest {
 	{
 		struct Visitor;
 
-		impl<'de> serde::de::Visitor<'de> for Visitor {
+		impl serde::de::Visitor<'_> for Visitor {
 			type Value = Nest;
 
 			fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {

@@ -43,7 +43,7 @@ impl<'l, T, B> Processed<'l, T, B> {
 	}
 }
 
-impl<'l, T, B> ops::Deref for Processed<'l, T, B> {
+impl<T, B> ops::Deref for Processed<'_, T, B> {
 	type Target = Context<T, B>;
 
 	fn deref(&self) -> &Self::Target {
@@ -51,7 +51,7 @@ impl<'l, T, B> ops::Deref for Processed<'l, T, B> {
 	}
 }
 
-impl<'l, T, B> ops::DerefMut for Processed<'l, T, B> {
+impl<T, B> ops::DerefMut for Processed<'_, T, B> {
 	fn deref_mut(&mut self) -> &mut Self::Target {
 		&mut self.processed
 	}

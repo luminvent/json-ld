@@ -473,8 +473,8 @@ pub struct CompoundValueTriplesWith<'a, 'n, N: Vocabulary, G: Generator<N>> {
 	inner: CompoundValueTriples<'a, N::Iri, N::BlankId, N::Literal>,
 }
 
-impl<'a, 'n, N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator
-	for CompoundValueTriplesWith<'a, 'n, N, G>
+impl<N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator
+	for CompoundValueTriplesWith<'_, '_, N, G>
 where
 	N::Iri: AsRef<Iri> + Clone,
 	N::BlankId: Clone,
@@ -609,8 +609,8 @@ pub struct ListTriplesWith<'a, 'n, V: Vocabulary, G: Generator<V>> {
 	inner: ListTriples<'a, V::Iri, V::BlankId, V::Literal>,
 }
 
-impl<'a, 'n, N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator
-	for ListTriplesWith<'a, 'n, N, G>
+impl<N: Vocabulary + IriVocabularyMut, G: Generator<N>> Iterator
+	for ListTriplesWith<'_, '_, N, G>
 where
 	N::Iri: AsRef<Iri> + Clone,
 	N::BlankId: Clone,

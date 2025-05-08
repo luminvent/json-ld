@@ -174,8 +174,8 @@ impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
-	for object::IndexedEntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
+	for object::IndexedEntryValueRef<'_, T, B>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -192,8 +192,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
-	for object::IndexedEntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
+	for object::IndexedEntryValueRef<'_, T, B>
 {
 	fn contextual_fmt_with_size(
 		&self,
@@ -213,8 +213,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
-	for object::EntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
+	for object::EntryValueRef<'_, T, B>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -236,8 +236,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
-	for object::EntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
+	for object::EntryValueRef<'_, T, B>
 {
 	fn contextual_fmt_with_size(
 		&self,
@@ -267,8 +267,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
-	for object::value::EntryRef<'a, T>
+impl<T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
+	for object::value::EntryRef<'_, T>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -287,8 +287,8 @@ impl<'a, T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, N: IriVocabulary<Iri = T>> PrintWithSizeAndContext<N>
-	for object::value::EntryRef<'a, T>
+impl<T, N: IriVocabulary<Iri = T>> PrintWithSizeAndContext<N>
+	for object::value::EntryRef<'_, T>
 {
 	fn contextual_fmt_with_size(
 		&self,
@@ -310,8 +310,8 @@ impl<'a, T, N: IriVocabulary<Iri = T>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
-	for object::value::TypeRef<'a, T>
+impl<T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
+	for object::value::TypeRef<'_, T>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -328,7 +328,7 @@ impl<'a, T, N: IriVocabulary<Iri = T>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, N: IriVocabulary<Iri = T>> PrintWithContext<N> for object::value::TypeRef<'a, T> {
+impl<T, N: IriVocabulary<Iri = T>> PrintWithContext<N> for object::value::TypeRef<'_, T> {
 	fn contextual_fmt_with(
 		&self,
 		vocabulary: &N,
@@ -345,7 +345,7 @@ impl<'a, T, N: IriVocabulary<Iri = T>> PrintWithContext<N> for object::value::Ty
 	}
 }
 
-impl<'a> PrecomputeSize for object::value::ValueEntryRef<'a> {
+impl PrecomputeSize for object::value::ValueEntryRef<'_> {
 	fn pre_compute_size(&self, options: &Options, sizes: &mut Vec<Size>) -> Size {
 		match self {
 			Self::Literal(l) => l.pre_compute_size(options, sizes),
@@ -355,7 +355,7 @@ impl<'a> PrecomputeSize for object::value::ValueEntryRef<'a> {
 	}
 }
 
-impl<'a> PrintWithSize for object::value::ValueEntryRef<'a> {
+impl PrintWithSize for object::value::ValueEntryRef<'_> {
 	fn fmt_with_size(
 		&self,
 		f: &mut std::fmt::Formatter,
@@ -489,8 +489,8 @@ impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
-	for object::node::IndexedEntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
+	for object::node::IndexedEntryValueRef<'_, T, B>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -507,8 +507,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
-	for object::node::IndexedEntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
+	for object::node::IndexedEntryValueRef<'_, T, B>
 {
 	fn contextual_fmt_with_size(
 		&self,
@@ -528,8 +528,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
-	for object::node::EntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
+	for object::node::EntryValueRef<'_, T, B>
 {
 	fn contextual_pre_compute_size(
 		&self,
@@ -562,8 +562,8 @@ impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrecomputeSizeWithContext<N>
 	}
 }
 
-impl<'a, T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
-	for object::node::EntryValueRef<'a, T, B>
+impl<T, B, N: Vocabulary<Iri = T, BlankId = B>> PrintWithSizeAndContext<N>
+	for object::node::EntryValueRef<'_, T, B>
 {
 	fn contextual_fmt_with_size(
 		&self,

@@ -35,8 +35,8 @@ impl<'a, I, V: Vocabulary> SerializeList<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
-	for SerializeList<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::SubjectVisitor<I, V>
+	for SerializeList<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,
@@ -125,8 +125,8 @@ impl<'a, I, V: Vocabulary> SerializeListFirst<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
-	for SerializeListFirst<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
+	for SerializeListFirst<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,
@@ -171,8 +171,8 @@ impl<'a, I, V: Vocabulary> SerializeListRest<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
-	for SerializeListRest<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
+	for SerializeListRest<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,

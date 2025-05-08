@@ -30,8 +30,8 @@ impl<'a, I, V: Vocabulary> SerializeProperty<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
-	for SerializeProperty<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
+	for SerializeProperty<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,
@@ -73,8 +73,8 @@ impl<'a, I, V: Vocabulary> SerializeReverseProperty<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
-	for SerializeReverseProperty<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::PredicateObjectsVisitor<I, V>
+	for SerializeReverseProperty<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,

@@ -34,8 +34,8 @@ impl<'a, I, V: Vocabulary> SerializeDefaultGraph<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::GraphVisitor<I, V>
-	for SerializeDefaultGraph<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::GraphVisitor<I, V>
+	for SerializeDefaultGraph<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,

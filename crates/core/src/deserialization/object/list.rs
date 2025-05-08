@@ -82,7 +82,7 @@ where
 
 struct Rest<'a, T, B>(&'a [IndexedObject<T, B>]);
 
-impl<'a, T, B, V: Vocabulary, I: Interpretation> LinkedDataResource<I, V> for Rest<'a, T, B> {
+impl<T, B, V: Vocabulary, I: Interpretation> LinkedDataResource<I, V> for Rest<'_, T, B> {
 	fn interpretation(
 		&self,
 		_vocabulary: &mut V,
@@ -92,7 +92,7 @@ impl<'a, T, B, V: Vocabulary, I: Interpretation> LinkedDataResource<I, V> for Re
 	}
 }
 
-impl<'a, T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataSubject<I, V> for Rest<'a, T, B>
+impl<T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataSubject<I, V> for Rest<'_, T, B>
 where
 	T: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
 	B: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
@@ -111,8 +111,8 @@ where
 	}
 }
 
-impl<'a, T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
-	for Rest<'a, T, B>
+impl<T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
+	for Rest<'_, T, B>
 where
 	T: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
 	B: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,

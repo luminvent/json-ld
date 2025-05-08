@@ -143,9 +143,9 @@ impl<'a> Iterator for SubValues<'a> {
 	}
 }
 
-impl<'a> ExactSizeIterator for SubValues<'a> {}
+impl ExactSizeIterator for SubValues<'_> {}
 
-impl<'a> DoubleEndedIterator for SubValues<'a> {
+impl DoubleEndedIterator for SubValues<'_> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		match self {
 			Self::None => None,

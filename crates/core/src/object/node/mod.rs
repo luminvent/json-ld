@@ -953,7 +953,7 @@ impl<'a, T, B> Iterator for Entries<'a, T, B> {
 	}
 }
 
-impl<'a, T, B> ExactSizeIterator for Entries<'a, T, B> {}
+impl<T, B> ExactSizeIterator for Entries<'_, T, B> {}
 
 #[derive(Educe)]
 #[educe(Clone)]
@@ -978,7 +978,7 @@ impl<'a, T, B> Iterator for IndexedEntries<'a, T, B> {
 	}
 }
 
-impl<'a, T, B> ExactSizeIterator for IndexedEntries<'a, T, B> {}
+impl<T, B> ExactSizeIterator for IndexedEntries<'_, T, B> {}
 
 #[derive(Educe, PartialEq, Eq)]
 #[educe(Clone, Copy)]

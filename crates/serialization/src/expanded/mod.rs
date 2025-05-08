@@ -41,8 +41,8 @@ impl<'a, I, V: Vocabulary> SerializeExpandedDocument<'a, I, V> {
 	}
 }
 
-impl<'a, I: Interpretation, V: Vocabulary> linked_data_next::Visitor<I, V>
-	for SerializeExpandedDocument<'a, I, V>
+impl<I: Interpretation, V: Vocabulary> linked_data_next::Visitor<I, V>
+	for SerializeExpandedDocument<'_, I, V>
 where
 	V: IriVocabularyMut,
 	V::Iri: Clone + Eq + Hash,

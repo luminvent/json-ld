@@ -128,8 +128,8 @@ where
 
 struct Types<'a, T, B>(&'a [crate::Id<T, B>]);
 
-impl<'a, T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
-	for Types<'a, T, B>
+impl<T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
+	for Types<'_, T, B>
 where
 	T: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
 	B: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
@@ -151,8 +151,8 @@ where
 
 struct Objects<'a, T, B>(&'a [IndexedObject<T, B>]);
 
-impl<'a, T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
-	for Objects<'a, T, B>
+impl<T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
+	for Objects<'_, T, B>
 where
 	T: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
 	B: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
@@ -172,8 +172,8 @@ where
 
 struct Nodes<'a, T, B>(&'a [IndexedNode<T, B>]);
 
-impl<'a, T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
-	for Nodes<'a, T, B>
+impl<T, B, V: Vocabulary<Iri = T>, I: Interpretation> LinkedDataPredicateObjects<I, V>
+	for Nodes<'_, T, B>
 where
 	T: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,
 	B: LinkedDataResource<I, V> + LinkedDataSubject<I, V>,

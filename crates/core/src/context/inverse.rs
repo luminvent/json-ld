@@ -209,7 +209,7 @@ pub enum Selection<'a, T> {
 	Lang(Vec<LangSelection<'a>>),
 }
 
-impl<'a, T: fmt::Debug> fmt::Debug for Selection<'a, T> {
+impl<T: fmt::Debug> fmt::Debug for Selection<'_, T> {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		match self {
 			Selection::Any => write!(f, "Any"),

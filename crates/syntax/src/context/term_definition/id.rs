@@ -123,7 +123,7 @@ pub enum IdRef<'a> {
 	Keyword(Keyword),
 }
 
-impl<'a> IdRef<'a> {
+impl IdRef<'_> {
 	pub fn as_str(&self) -> &str {
 		match self {
 			Self::Term(t) => t,
@@ -158,7 +158,7 @@ impl<'a> From<IdRef<'a>> for ExpandableRef<'a> {
 	}
 }
 
-impl<'a> fmt::Display for IdRef<'a> {
+impl fmt::Display for IdRef<'_> {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		self.as_str().fmt(f)
 	}

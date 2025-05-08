@@ -166,13 +166,13 @@ impl<'a> Iterator for BindingsIter<'a> {
 	}
 }
 
-impl<'a> DoubleEndedIterator for BindingsIter<'a> {
+impl DoubleEndedIterator for BindingsIter<'_> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(k, d)| (k, d.as_ref()))
 	}
 }
 
-impl<'a> ExactSizeIterator for BindingsIter<'a> {}
+impl ExactSizeIterator for BindingsIter<'_> {}
 
 impl Bindings {
 	pub fn insert(

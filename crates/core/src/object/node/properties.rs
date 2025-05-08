@@ -317,9 +317,9 @@ impl<'a, T, B> Iterator for Iter<'a, T, B> {
 	}
 }
 
-impl<'a, T, B> ExactSizeIterator for Iter<'a, T, B> {}
+impl<T, B> ExactSizeIterator for Iter<'_, T, B> {}
 
-impl<'a, T, B> std::iter::FusedIterator for Iter<'a, T, B> {}
+impl<T, B> std::iter::FusedIterator for Iter<'_, T, B> {}
 
 /// Iterator over the properties of a node, giving a mutable reference
 /// to the associated objects.

@@ -124,7 +124,7 @@ impl<'a, T, B> TypeRef<'a, T, B> {
 	}
 }
 
-impl<'a, T: AsRef<str>, B: AsRef<str>> TypeRef<'a, T, B> {
+impl<T: AsRef<str>, B: AsRef<str>> TypeRef<'_, T, B> {
 	pub fn as_str(&self) -> &str {
 		match self {
 			Self::Json => "@json",
@@ -135,7 +135,7 @@ impl<'a, T: AsRef<str>, B: AsRef<str>> TypeRef<'a, T, B> {
 	}
 }
 
-impl<'a, T: PartialEq, B: PartialEq> PartialEq<Type<T, B>> for TypeRef<'a, T, B> {
+impl<T: PartialEq, B: PartialEq> PartialEq<Type<T, B>> for TypeRef<'_, T, B> {
 	fn eq(&self, other: &Type<T, B>) -> bool {
 		let other_ref: TypeRef<T, B> = other.into();
 		*self == other_ref
@@ -149,7 +149,7 @@ impl<'a, T: PartialEq, B: PartialEq> PartialEq<TypeRef<'a, T, B>> for Type<T, B>
 	}
 }
 
-impl<'a, T: fmt::Display, B: fmt::Display> fmt::Display for TypeRef<'a, T, B> {
+impl<T: fmt::Display, B: fmt::Display> fmt::Display for TypeRef<'_, T, B> {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		match self {
 			Self::Json => write!(f, "@json"),
